@@ -1,5 +1,6 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { Outlet, Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -27,7 +28,7 @@ function Buttons() {
       <button 
           className="btn btn-primary"
       >
-        Let Me Cook!
+        <Link to="/Flavors">Let Me Cook!</Link>
       </button>
 
       <div className="row buttons-con-inner">
