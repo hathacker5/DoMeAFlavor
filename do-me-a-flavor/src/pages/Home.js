@@ -1,7 +1,7 @@
-import './App.css';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 
-function App() {
+function Home() {
   return (
     <div>
       <Title />
@@ -61,19 +61,4 @@ function FlavorIcons() {
   )
 }
 
-export default App;
-
-
-// import './App.css';
-// import Home from './pages/Home.js';
-// import 'bootstrap/dist/css/bootstrap.min.css'; 
-// import { Routes, Route } from "react-router-dom";
-
-// function App() { 
-//   return (
-//     <Routes>
-//         <Route path="/" element={<Home />} />
-//     </Routes>
-//   );
-// }
-// export default App;
+export default Home;
