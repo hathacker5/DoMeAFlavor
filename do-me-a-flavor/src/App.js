@@ -52,11 +52,22 @@ function Buttons() {
   )
 }
 
+const flavors = [
+  "spicy", 
+  "sweet", 
+  "rich", 
+  "sour", 
+  "salty", 
+  "bitter", 
+  "umami"
+];
+
 function FlavorIcons() {
   return (
-    // plan: have them in a line, and wrap them.
-    <div className="flavor-icons-con"> 
-      <p>in flavor icons</p>
+    <div className="flavor-icons-con">
+      {flavors.map((flavor, index) => (
+        <img key={index} src={`./images/icon_${flavor}.svg`} alt={`${flavor} icon`} className="flavor-icon" />
+      ))}
     </div>
   )
 }

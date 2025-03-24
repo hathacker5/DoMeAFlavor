@@ -2,10 +2,13 @@
   font-size: 200%;
 }
 #title-2 {
+  padding: 5%;
   font-size: 300%;
 }
 .title-con {
   background-color: #2BC1CC;
+  text-align: center;
+  color: white;
 
   /* padding: 15%; */
   /* min-height requires display, flex-direction, align-itmes, and justify-content */
@@ -14,9 +17,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  text-align: center;
-  color: white;
 }
 .buttons-con-outer {
   padding: 2%;
@@ -27,5 +27,14 @@
 }
 .flavor-icons-con {
   padding: 2%;
-  
+
+}
+
+.flavor-icons-con {
+  padding: 2%;
+  text-align: center;
+  margin: 15%;
+}
+.flavor-icon {
+  padding: 2%;
 }
