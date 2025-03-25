@@ -1,12 +1,15 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header.js";
+import { Outlet, Link } from "react-router-dom";
+
 
 function Flavor() {
   return (
     <div className="container">
       <Header />
-
+      <button> <Link to="/Ingredients">Back</Link> </button>
+      <button> <Link to="/RecipeList">Next</Link> </button>
       <SingleFlavor name="Spicy" />
     </div>
   );

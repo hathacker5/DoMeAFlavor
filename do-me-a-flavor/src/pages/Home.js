@@ -28,7 +28,7 @@ function Buttons() {
       <button 
           className="btn btn-primary"
       >
-        <Link to="/Flavors">Let Me Cook!</Link>
+        <Link to="/Ingredients">Let Me Cook!</Link>
       </button>
 
       <div className="row buttons-con-inner">
