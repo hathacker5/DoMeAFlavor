@@ -3,15 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Header.js";
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-
-
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
 
 const ingredientList2 = ["apple", "sugar", "flour"];
 
 function RecipeList() {
-  const [recipeIDList, setRecipeIDList] = useState([]);
+  const [recipeList, setRecipeList] = useState([]);
 
   return (
     <div classname="container">
@@ -21,29 +19,34 @@ function RecipeList() {
         {" "}
         <Link to="/Flavors">Back</Link>{" "}
       </button>
-      <button
-        onClick={() =>
-          getRecipeIDs(ingredientList2, recipeIDList, setRecipeIDList)
-        }
-      >
+      <button onClick={() => getRecipeIDs(ingredientList2, setRecipeList)}>
         Get Recipes
       </button>
 
-
-      {recipeIDList.map((id) => (
-          <RecipeCard
-            id={id}
-          />
-        ))}
+      {recipeList.map((recipe) => (
+        <RecipeCard recipe={recipe} />
+      ))}
     </div>
   );
 }
-const RecipeCard = ({ id }) => {
-    return (
-      <Col sm={12}>
-      <Card style={{ display: 'flex', alignItems: 'center', width: '100%', margin: '15px', marginBottom: '10px', borderRadius: '25px', borderWidth: '4px'}}>
+const RecipeCard = ({ recipe }) => {
+  return (
+    <Col sm={12}>
+      <Card
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          margin: "15px",
+          marginBottom: "10px",
+          borderRadius: "25px",
+          borderWidth: "4px",
+        }}
+      >
         <Card.Body>
-          <Card.Title style = {{fontSize: '32px', color:'#6cb1c9'}}><b>Recipe ID: {id}</b></Card.Title>
+          <Card.Title style={{ fontSize: "32px", color: "#6cb1c9" }}>
+            <b>Recipe ID: {recipe.id}</b>
+          </Card.Title>
           {/* <Card.Subtitle style = {{fontSize: '24px', color: 'darkgray'}}><b><em>Subtitle</em></b></Card.Subtitle>
           <Card.Text>
             <b>Terminal:</b> Value <br />
@@ -51,13 +54,19 @@ const RecipeCard = ({ id }) => {
             <b>Departure:</b> Value <br />
             <b>Arrival:</b> Value
           </Card.Text> */}
+          <Card.Text>
+            {recipe.title} <br />
+            
+            <img src={recipe.image} alt={recipe.title} />
+            percent match
+          </Card.Text>
         </Card.Body>
       </Card>
-      </Col>
-    );
-  };
+    </Col>
+  );
+};
 
-const getRecipeIDs = async (ingredientList, recipeIDList, setRecipeIDList) => {
+const getRecipeIDs = async (ingredientList, setrecipeList) => {
   const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${ingredientList.toString()}&number=10&ignorePantry=true&ranking=1`;
   const options = {
     method: "GET",
@@ -71,17 +80,8 @@ const getRecipeIDs = async (ingredientList, recipeIDList, setRecipeIDList) => {
     const response = await fetch(url, options);
     const result = await response.json();
     console.log(result);
-    const idList = Object.entries(result).map(([index, value]) => value.id);
-    console.log("idlist:");
-    console.log(idList);
-    
-    console.log("original recipeIDList:");
-    console.log(recipeIDList);
-
-    console.log("updated recipeIDList:");
-    setRecipeIDList(idList);
-    console.log(recipeIDList);
-
+    const idList = Object.entries(result).map(([index, value]) => value);
+    setrecipeList(idList);
   } catch (error) {
     console.error(error);
   }
