@@ -47,16 +47,8 @@ const RecipeCard = ({ recipe }) => {
           <Card.Title style={{ fontSize: "32px", color: "#6cb1c9" }}>
             <b>Recipe ID: {recipe.id}</b>
           </Card.Title>
-          {/* <Card.Subtitle style = {{fontSize: '24px', color: 'darkgray'}}><b><em>Subtitle</em></b></Card.Subtitle>
-          <Card.Text>
-            <b>Terminal:</b> Value <br />
-            <b>Aircraft:</b> Value <br />
-            <b>Departure:</b> Value <br />
-            <b>Arrival:</b> Value
-          </Card.Text> */}
           <Card.Text>
             {recipe.title} <br />
-            
             <img src={recipe.image} alt={recipe.title} />
             percent match
           </Card.Text>
