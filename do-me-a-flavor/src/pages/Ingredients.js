@@ -5,11 +5,16 @@ import { Outlet, Link } from "react-router-dom";
 import { BsPlusCircle } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function Ingredients(){
-  const [ingredientList, setIngredientList] = useState([]); // list of names of the ingredients the user selected
+  const [ingredientList, setIngredientList] = useState([]);     // list of names of the ingredients the user selected
   const [searchResults, setSearchResults] = useState([]);       // output of search
 
+  const handleClick2 = () => {
+    console.log(ingredientList);
+  };
+  
   return(
     <div classname = "container">
       <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
@@ -30,17 +35,17 @@ function Ingredients(){
         // error handling
         <p>Couldn't find any ingredients</p>
       )}
-      
-      {/* <IngredientItem name = "potato" image = ":)" description="A yummy potatoooo" ingredientList={ingredientList} setIngredientList={setIngredientList} /> */}
+
       <br />
-      
       <button> <Link to="/">Back</Link> </button>
-      <button> <Link to="/Flavors">Next</Link> </button>
+      <button> <Link to="/Flavors" state={{ingredientList: {ingredientList}}}> Next</Link></button>
+      <button onClick={handleClick2}>Log Ingredients</button>
       <br />
       
     </div>
   )
 }
+
 
 export function SearchBox({ searchResults, setSearchResults }) {
   const [searchText, setSearchText] = useState('');
@@ -112,9 +117,6 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
           <div className="row">
             <b>{name}</b>
           </div>
-          {/* <div className="row">
-            <p>{description}</p>
-          </div> */}
         </div>
         <div className="col-1">
           <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } > 
@@ -133,7 +135,6 @@ const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
     } else {
         // add
         setIngredientList([...ingredientList, name]);
-
     }
 };
 

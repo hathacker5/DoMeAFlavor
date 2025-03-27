@@ -5,11 +5,25 @@ import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
+import { useLocation } from 'react-router-dom';
 
 const ingredientList2 = ["apple", "sugar", "flour"];
 
+
 function RecipeList() {
-  const [recipeList, setRecipeList] = useState([]);
+    const [recipeList, setRecipeList] = useState([]);
+    
+    // getting data from Flavor: ingredient list and flavor settings
+    const location = useLocation();
+    const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
+    // console.log("Ingredient list in recipe list page: ", ingredientList);
+    // console.log("Spicy value in ingredient list page", spicy);
+    // console.log("sweet value in ingredient list page", sweet);
+    // console.log("salty value in ingredient list page", salty);
+    // console.log("bitter value in ingredient list page", bitter);
+    // console.log("rich value in ingredient list page", rich);
+    // console.log("umami value in ingredient list page", umami);
+    // console.log("sour value in ingredient list page", sour);
 
   return (
     <div classname="container">
