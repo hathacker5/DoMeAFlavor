@@ -6,140 +6,126 @@ import { BsPlusCircle } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
 
-// default ingredients the user can choose from; they can search up more
-const initialIngredientList = [
-    {
-      id: 1,
-      title: "Gyoza",
-      description: "Japanese dumplings",
-      imageName: "gyoza.png",
-      price: 5.99,
-    },
-    {
-      id: 2,
-      title: "Sushi",
-      description: "Japanese rice rolls",
-      imageName: "sushi.png",
-      price: 6.99,
-    },
-    {
-      id: 3,
-      title: "Ramen",
-      description: "Japanese noodle soup",
-      imageName: "ramen.png",
-      price: 7.99,
-    },
-    {
-      id: 4,
-      title: "Matcha Cake",
-      description: "Japanese green tea cake",
-      imageName: "matcha-cake.png",
-      price: 4.99,
-    },
-    {
-      id: 5,
-      title: "Mochi",
-      description: "Japanese rice cake",
-      imageName: "mochi.png",
-      price: 3.99,
-    },
-    {
-      id: 6,
-      title: "Yakitori",
-      description: "Japanese skewered chicken",
-      imageName: "yakitori.png",
-      price: 2.99,
-    },
-    {
-      id: 7,
-      title: "Takoyaki",
-      description: "Japanese octopus balls",
-      imageName: "takoyaki.png",
-      price: 5.99,
-    },
-    {
-      id: 8,
-      title: "Sashimi",
-      description: "Japanese raw fish",
-      imageName: "sashimi.png",
-      price: 8.99,
-    },
-    {
-      id: 9,
-      title: "Okonomiyaki",
-      description: "Japanese savory pancake",
-      imageName: "okonomiyaki.png",
-      price: 6.99,
-    },
-    {
-      id: 10,
-      title: "Katsu Curry",
-      description: "Japanese curry with fried pork",
-      imageName: "katsu-curry.png",
-      price: 9.99,
-    },
-  ];
-
-
-
-
 function Ingredients(){
-    const [ingredientList, setIngredientList] = useState([]); // list of names of the ingredients
+  const [ingredientList, setIngredientList] = useState([]); // list of names of the ingredients the user selected
+  const [searchResults, setSearchResults] = useState([]);       // output of search
 
-    return(
-        <div classname = "container">
-             {initialIngredientList.map((item) => (
-                <IngredientItem
-                    name={item.title}
-                    description={item.description}
-                    image={"./images/" + item.imageName}
-                    ingredientList={ingredientList}
-                    setIngredientList={setIngredientList}
-                />
-                ))}
-            <IngredientItem name = "potato" image = ":)" description="A yummy potatoooo" ingredientList={ingredientList} setIngredientList={setIngredientList} />
-            <br />
-            <button> <Link to="/">Back</Link> </button>
-            <button> <Link to="/Flavors">Next</Link> </button>
-            <br />
-            
-        </div>
-    )
+  return(
+    <div classname = "container">
+      <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
+
+      
+      {/* {initialIngredientList.map((item) => (
+        <IngredientItem
+            name={item.title}
+            description={item.description}
+            image={"./images/" + item.imageName}
+            ingredientList={ingredientList}
+            setIngredientList={setIngredientList}
+        />
+      ))} */}
+      <IngredientItem name = "potato" image = ":)" description="A yummy potatoooo" ingredientList={ingredientList} setIngredientList={setIngredientList} />
+      <br />
+      <button> <Link to="/">Back</Link> </button>
+      <button> <Link to="/Flavors">Next</Link> </button>
+      <br />
+      
+    </div>
+  )
 }
+
+export function SearchBox({ searchResults, setSearchResults }) {
+  const [searchText, setSearchText] = useState('');
+
+  const handleInputChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch(searchText, setSearchResults);
+      console.log("Updated results for ", searchText, ": ", searchResults);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search for ingredients"
+        value={searchText}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
+      />
+      <p><b>SEARCHING FOR: {searchText.toUpperCase()}</b></p>
+    </div>
+  );
+}
+
+const handleSearch = (searchText, setSearchResults) => {
+  fetchSearchResults(searchText, setSearchResults); 
+};
+
+const fetchSearchResults = async(searchQuery, setSearchResults) => {
+  // const url = `https://api.spoonacular.com/food/ingredients/search?query=${searchQuery}&number=2&sort=calories&sortDirection=desc`;
+  // const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${searchQuery}`
+  const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/search?query=${searchQuery}`
+  
+  
+  const options = {
+    method: 'GET',
+    headers: {
+      "x-rapidapi-key": "5e280eff54msh125ec8c51385101p131466jsne19c66db25b6",
+      "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    // const response = fetch(url, options);
+    // const result = response.json();
+    console.log(result);
+  
+    if (result.results != null) {
+      setSearchResults(result.results); // puts results array from api call into searchResults
+    } else {
+      setSearchResults(`No results found for ${searchQuery}`);
+    }
+  } catch (error) {
+      console.error(error);
+  }
+};
 
 // renders the name, image, and description of one ingredient
 const IngredientItem = ({ name, image, description, ingredientList, setIngredientList }) => {
-    // const isIngredientInList = ;
+  // const isIngredientInList = ;
 
-    
-    return (
-        <div className="container" >
-            <div className="row">
-                <div className="col-3">
-                    <img src={image} alt={"An image of "+name} class="img-fluid rounded float-left"/>
-                </div>
-                <div className="col-8">
-                    <div className="row">
-                        <b>{name}</b>
-                    </div>
-                    <div className="row">
-                        <p>{description}</p>
-                    </div>
-                </div>
-                <div className="col-1">
-                    {/* { ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
-                    {/* { !ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
-                    <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } > 
-                        {ingredientList.includes(name) ? <BsDashCircle /> : <BsPlusCircle /> }
-                    </button>
 
-                    
-                    
-                </div>
-            </div>
-            
+  return (
+    <div className="container" >
+      <div className="row">
+        <div className="col-3">
+          <img src={image} alt={"An image of "+name} class="img-fluid rounded float-left"/>
         </div>
-    )
+        <div className="col-8">
+          <div className="row">
+            <b>{name}</b>
+          </div>
+          <div className="row">
+            <p>{description}</p>
+          </div>
+        </div>
+        <div className="col-1">
+          {/* { ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
+          {/* { !ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
+          <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } > 
+            {ingredientList.includes(name) ? <BsDashCircle /> : <BsPlusCircle /> }
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
