@@ -13,19 +13,27 @@ function Ingredients(){
   return(
     <div classname = "container">
       <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
+      {console.log("Search results", searchResults)}
+      {console.log("Ingredients list", ingredientList)}
 
+
+      {searchResults.length > 0 ? (
+        searchResults.map((item) => (
+          <IngredientItem
+              name={item.name}
+              image={item.image}
+              ingredientList={ingredientList}
+              setIngredientList={setIngredientList}
+          />
+        ))
+      ) : (
+        // error handling
+        <p>Couldn't find any ingredients</p>
+      )}
       
-      {/* {initialIngredientList.map((item) => (
-        <IngredientItem
-            name={item.title}
-            description={item.description}
-            image={"./images/" + item.imageName}
-            ingredientList={ingredientList}
-            setIngredientList={setIngredientList}
-        />
-      ))} */}
-      <IngredientItem name = "potato" image = ":)" description="A yummy potatoooo" ingredientList={ingredientList} setIngredientList={setIngredientList} />
+      {/* <IngredientItem name = "potato" image = ":)" description="A yummy potatoooo" ingredientList={ingredientList} setIngredientList={setIngredientList} /> */}
       <br />
+      
       <button> <Link to="/">Back</Link> </button>
       <button> <Link to="/Flavors">Next</Link> </button>
       <br />
@@ -67,10 +75,7 @@ const handleSearch = (searchText, setSearchResults) => {
 };
 
 const fetchSearchResults = async(searchQuery, setSearchResults) => {
-  // const url = `https://api.spoonacular.com/food/ingredients/search?query=${searchQuery}&number=2&sort=calories&sortDirection=desc`;
-  // const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=${searchQuery}`
   const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/search?query=${searchQuery}`
-  
   
   const options = {
     method: 'GET',
@@ -83,8 +88,6 @@ const fetchSearchResults = async(searchQuery, setSearchResults) => {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    // const response = fetch(url, options);
-    // const result = response.json();
     console.log(result);
   
     if (result.results != null) {
@@ -98,27 +101,22 @@ const fetchSearchResults = async(searchQuery, setSearchResults) => {
 };
 
 // renders the name, image, and description of one ingredient
-const IngredientItem = ({ name, image, description, ingredientList, setIngredientList }) => {
-  // const isIngredientInList = ;
-
-
+const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
   return (
     <div className="container" >
       <div className="row">
         <div className="col-3">
-          <img src={image} alt={"An image of "+name} class="img-fluid rounded float-left"/>
+          <img src={image} alt={"An image of " + name} class="img-fluid rounded float-left"/>
         </div>
         <div className="col-8">
           <div className="row">
             <b>{name}</b>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <p>{description}</p>
-          </div>
+          </div> */}
         </div>
         <div className="col-1">
-          {/* { ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
-          {/* { !ingredientList.includes(name) && (<div> This gets rendered when sold is true</div>)} */}
           <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } > 
             {ingredientList.includes(name) ? <BsDashCircle /> : <BsPlusCircle /> }
           </button>
