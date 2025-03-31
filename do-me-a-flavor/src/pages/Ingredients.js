@@ -18,9 +18,6 @@ function Ingredients(){
   return(
     <div classname = "container">
       <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
-      {console.log("Search results", searchResults)}
-      {console.log("Ingredients list", ingredientList)}
-
 
       {searchResults.length > 0 ? (
         searchResults.map((item) => (
@@ -57,7 +54,6 @@ export function SearchBox({ searchResults, setSearchResults }) {
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleSearch(searchText, setSearchResults);
-      console.log("Updated results for ", searchText, ": ", searchResults);
     }
   };
 
@@ -93,7 +89,6 @@ const fetchSearchResults = async(searchQuery, setSearchResults) => {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    console.log(result);
   
     if (result.results != null) {
       setSearchResults(result.results); // puts results array from api call into searchResults
