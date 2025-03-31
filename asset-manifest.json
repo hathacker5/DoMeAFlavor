@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/DoMeAFlavor/static/css/main.b150a474.css",
-    "main.js": "/DoMeAFlavor/static/js/main.26cfbf44.js",
+    "main.css": "/DoMeAFlavor/static/css/main.a2d4da14.css",
+    "main.js": "/DoMeAFlavor/static/js/main.dd08d6aa.js",
     "static/js/453.471d1919.chunk.js": "/DoMeAFlavor/static/js/453.471d1919.chunk.js",
+    "static/media/icon_umami.svg": "/DoMeAFlavor/static/media/icon_umami.3c4d9ff3a4296279d915.svg",
+    "static/media/icon_salty.svg": "/DoMeAFlavor/static/media/icon_salty.1eae32b2db2d2b01c233.svg",
+    "static/media/icon_sweet.svg": "/DoMeAFlavor/static/media/icon_sweet.70e83f349c9c1c61d6ac.svg",
+    "static/media/icon_rich.svg": "/DoMeAFlavor/static/media/icon_rich.6c961a4fea5c3b1b0e6b.svg",
+    "static/media/icon_sour.svg": "/DoMeAFlavor/static/media/icon_sour.79d4fdcbb3fb06a679e5.svg",
+    "static/media/icon_bitter.svg": "/DoMeAFlavor/static/media/icon_bitter.b12dab5f9fdb6b610e4a.svg",
+    "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.6fd4a816ca0c7394e017.svg",
     "index.html": "/DoMeAFlavor/index.html",
-    "main.b150a474.css.map": "/DoMeAFlavor/static/css/main.b150a474.css.map",
-    "main.26cfbf44.js.map": "/DoMeAFlavor/static/js/main.26cfbf44.js.map",
+    "main.a2d4da14.css.map": "/DoMeAFlavor/static/css/main.a2d4da14.css.map",
+    "main.dd08d6aa.js.map": "/DoMeAFlavor/static/js/main.dd08d6aa.js.map",
     "453.471d1919.chunk.js.map": "/DoMeAFlavor/static/js/453.471d1919.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b150a474.css",
-    "static/js/main.26cfbf44.js"
+    "static/css/main.a2d4da14.css",
+    "static/js/main.dd08d6aa.js"
   ]
 }
