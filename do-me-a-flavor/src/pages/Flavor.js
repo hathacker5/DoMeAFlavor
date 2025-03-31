@@ -47,7 +47,7 @@ const SingleFlavor = ({ name, flavor, setFlavor, image }) => {
         <div className="col-9">
           <div className="row"><p>{name}</p></div>
           <div className="row">
-            <Slider flavor={flavor} setFlavor={setFlavor} />
+            <Slider name={name} flavor={flavor} setFlavor={setFlavor} />
           </div>
         </div>
       </div>
@@ -55,14 +55,16 @@ const SingleFlavor = ({ name, flavor, setFlavor, image }) => {
   );
 };
 
-function Slider({flavor, setFlavor}) {
+function Slider({name, flavor, setFlavor}) {
   const handleSliderChange = (e) => {
       setFlavor(e.target.value);
   };
 
+  var classname="custom-slider slider icon_"+name.toLowerCase();
+
   return (
       <div className="outer">
-          <div>
+          <div className="slidecontainer">
               <Form.Label>
                   Range Slider
               </Form.Label>
@@ -70,7 +72,7 @@ function Slider({flavor, setFlavor}) {
                   value={flavor}
                   name='hello'
                   onChange={handleSliderChange}
-                  className="custom-slider"/>
+                  className={classname}/>
               <p>Selected Value: {flavor}</p>
           </div>
       </div>
