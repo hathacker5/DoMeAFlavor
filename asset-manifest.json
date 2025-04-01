@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/DoMeAFlavor/static/css/main.a2d4da14.css",
-    "main.js": "/DoMeAFlavor/static/js/main.dd08d6aa.js",
+    "main.js": "/DoMeAFlavor/static/js/main.0b389588.js",
     "static/js/453.471d1919.chunk.js": "/DoMeAFlavor/static/js/453.471d1919.chunk.js",
     "static/media/icon_umami.svg": "/DoMeAFlavor/static/media/icon_umami.3c4d9ff3a4296279d915.svg",
     "static/media/icon_salty.svg": "/DoMeAFlavor/static/media/icon_salty.1eae32b2db2d2b01c233.svg",
@@ -12,11 +12,11 @@
     "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.6fd4a816ca0c7394e017.svg",
     "index.html": "/DoMeAFlavor/index.html",
     "main.a2d4da14.css.map": "/DoMeAFlavor/static/css/main.a2d4da14.css.map",
-    "main.dd08d6aa.js.map": "/DoMeAFlavor/static/js/main.dd08d6aa.js.map",
+    "main.0b389588.js.map": "/DoMeAFlavor/static/js/main.0b389588.js.map",
     "453.471d1919.chunk.js.map": "/DoMeAFlavor/static/js/453.471d1919.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a2d4da14.css",
-    "static/js/main.dd08d6aa.js"
+    "static/js/main.0b389588.js"
   ]
 }
