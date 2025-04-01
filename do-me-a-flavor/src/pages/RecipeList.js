@@ -49,7 +49,8 @@ const RecipeCard = ({ recipe }) => {
           </Card.Title>
           <Card.Text>
             <img src={recipe.image} alt={recipe.title} />
-            <p>{recipe.score}% flavor match</p>
+            <br/>
+            {parseInt(recipe.score)}% flavor match
           </Card.Text>
         </Card.Body>
       </Card>
@@ -78,22 +79,28 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
       
       // await waits for the api call to return and for the function to give an actual
       // result
-      const flavors = await getFlavorProfile(recipe.id);
+      var flavors = await getFlavorProfile(recipe.id);
 
-      // Calculates score
-      var score = 0.0;
-      score += 100 - Math.abs(flavors.bitterness - bitter);
-      score += 100 - Math.abs(flavors.fattiness - rich);
-      score += 100 - Math.abs(flavors.saltiness - salty);
-      score += 100 - Math.abs(flavors.sourness - sour);
-      const maxSpicy = 4500000;
-      score += 100 - Math.abs((Math.min(flavors.spiciness, maxSpicy) / maxSpicy) * 100 - spicy);
-      score += 100 - Math.abs(flavors.sweetness - sweet);
-      score += 100 - Math.abs(flavors.savoriness - umami);
-      score /= 7;
+      if (flavors == []) {
+        // api call didn't work
+        recipeList[i].score = 0;
+        console.log("api score won't work, getFlavorProfile failed");
+      } else {
+        // Calculates score
+        var score = 0.0;
+        score += 100 - Math.abs(flavors.bitterness - bitter);
+        score += 100 - Math.abs(flavors.fattiness - rich);
+        score += 100 - Math.abs(flavors.saltiness - salty);
+        score += 100 - Math.abs(flavors.sourness - sour);
+        const maxSpicy = 4500000;
+        score += 100 - Math.abs((Math.min(flavors.spiciness, maxSpicy) / maxSpicy) * 100 - spicy);
+        score += 100 - Math.abs(flavors.sweetness - sweet);
+        score += 100 - Math.abs(flavors.savoriness - umami);
+        score /= 7;
 
-      // Saves score to recipe json entry in recipeList
-      recipeList[i].score = score;
+        // Saves score to recipe json entry in recipeList
+        recipeList[i].score = score;
+      }
     }
 
     // sort list

@@ -34,8 +34,16 @@ function Ingredients(){
       )}
 
       <br />
-      <button> <Link to="/">Back</Link> </button>
-      <button> <Link to="/Flavors" state={{ingredientList: {ingredientList}}}> Next</Link></button>
+      
+        <Link to="/">
+      <button>  Back
+      </button>
+      </Link> 
+
+      <button onClick={()=>{if (ingredientList.length == 0){
+        alert("Please pick at least one ingredient!!!");
+      }}}><Link to={ingredientList.length > 0 ? "/Flavors" : "/Ingredients"} state={{ingredientList: {ingredientList}}}>  Next </Link></button>
+      
       <button onClick={handleClick2}>Log Ingredients</button>
       <br />
       
