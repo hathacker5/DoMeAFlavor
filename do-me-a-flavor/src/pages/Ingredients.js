@@ -1,52 +1,57 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./Header.js";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BsPlusCircle } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 
-function Ingredients(){
+const Ingredients = () => {
   const [ingredientList, setIngredientList] = useState([]);     // list of names of the ingredients the user selected
   const [searchResults, setSearchResults] = useState([]);       // output of search
-
-  const handleClick2 = () => {
-    console.log(ingredientList);
-  };
   
   return(
-    <div classname = "container">
-      <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
+    <div>
+      <Header />
 
-      {searchResults.length > 0 ? (
-        searchResults.map((item) => (
-          <IngredientItem
-              name={item.name}
-              image={item.image}
-              ingredientList={ingredientList}
-              setIngredientList={setIngredientList}
-          />
-        ))
-      ) : (
-        // error handling
-        <p>Couldn't find any ingredients</p>
-      )}
+      {/* <MyButton list={ingredientList} /> */}
 
-      <br />
-      
+      <button onClick={() => (setIngredientList([...ingredientList, "apple"]))}>Debug: Add apple</button>
+      <p></p>
+
+      <div classname = "container">
+        <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
+
+        {searchResults.length > 0 ? (
+          searchResults.map((item) => (
+            <IngredientItem
+                name={item.name}
+                image={item.image}
+                ingredientList={ingredientList}
+                setIngredientList={setIngredientList}
+            />
+          ))
+        ) : (
+          // error handling
+          <p>Couldn't find any ingredients</p>
+        )}
+
+        <p>My Ingredients: {ingredientList.length > 0 ? ingredientList.join(", ") : "search to add ingredients"}.</p>
+
+        <br />
+        
+        {/* buttons */}
+
         <Link to="/">
-      <button>  Back
-      </button>
-      </Link> 
+          <button>Back</button>
+        </Link> 
 
-      <button onClick={()=>{if (ingredientList.length == 0){
-        alert("Please pick at least one ingredient!!!");
-      }}}><Link to={ingredientList.length > 0 ? "/Flavors" : "/Ingredients"} state={{ingredientList: {ingredientList}}}>  Next </Link></button>
-      
-      <button onClick={handleClick2}>Log Ingredients</button>
-      <br />
-      
+        <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, ingredientList.length === 0)} 
+            state={{ingredientList: {ingredientList}}}>  
+          <button>Next</button>
+        </Link>
+        
+        <br />
+      </div>
     </div>
   )
 }
@@ -66,7 +71,7 @@ export function SearchBox({ searchResults, setSearchResults }) {
   };
 
   return (
-    <div>
+    <>
       <input
         type="text"
         placeholder="Search for ingredients"
@@ -75,7 +80,7 @@ export function SearchBox({ searchResults, setSearchResults }) {
         onKeyDown={handleKeyDown}
       />
       <p><b>SEARCHING FOR: {searchText.toUpperCase()}</b></p>
-    </div>
+    </>
   );
 }
 
@@ -139,6 +144,41 @@ const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
         // add
         setIngredientList([...ingredientList, name]);
     }
+};
+
+const Header = () => {
+  return (
+    <div>
+      <div className="row">
+        <div className="col-2">
+          <Link to="/">
+          <button>Back</button>
+          </Link>
+        </div>
+        <div className="col-2">
+          <Link to="/">
+          <button>Home</button>
+          </Link>
+        </div>
+        <div className="col-8"></div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          Customize Your Flavor Profile
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Checks that the list isn't empty
+function handleIngredientsNext (e, isEmpty) {
+  if (isEmpty) {
+    e.preventDefault(); // Prevent the default link behavior (don't move)
+    alert("Please pick at least one ingredient.");
+  } else {
+    console.log("Navigating to /Flavors");
+  }
 };
 
 export default Ingredients;
