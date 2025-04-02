@@ -7,29 +7,54 @@ import Col from "react-bootstrap/Col";
 import { useLocation } from 'react-router-dom';
 
 function RecipeList() {
-    const [recipeList, setRecipeList] = useState([]);
-    
-    // getting data from Flavor: ingredient list and flavor settings
-    const location = useLocation();
-    const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
-    
+  // get data from previous page: ingredient list and flavor settings
+  const location = useLocation();
+  const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
+
+  // catch 'back' button data
+  // todo
+
+  // initialize this page's variables
+  const [recipeList, setRecipeList] = useState([]);
+
+  // setup 'back' button variables for previous page
+  const flavorIngredientsList = ingredientList.ingredientList;
+  const flavorSpicy = spicy.spicy;
+  const flavorSweet = sweet.sweet;
+  const flavorSalty = salty.salty;
+  const flavorBitter = bitter.bitter;
+  const flavorRich = rich.rich;
+  const flavorUmami = umami.umami;
+  const flavorSour = sour.sour;
+  
   return (
-    <div className="container">
-      <button>
-        {" "}
-        <Link to="/Flavors">Back</Link>{" "}
-      </button>
-      <button onClick={() => getRecipes(ingredientList, setRecipeList, spicy.spicy, sweet.sweet, salty.salty, bitter.bitter, rich.rich, umami.umami, sour.sour)}>
-        Get Recipes
-      </button>
+    <div>
+      {/* RecipeListHeader todo */}
+      <div className="container">
+        {/* buttons */}
+        <Link to="/Flavors" state={{flavorIngredientsList: {flavorIngredientsList}, flavorSpicy: {flavorSpicy}, flavorSweet: {flavorSweet}, flavorSalty: {flavorSalty}, flavorBitter: {flavorBitter}, flavorRich: {flavorRich}, flavorUmami: {flavorUmami}, flavorSour: {flavorSour} }}>
+          <button>Back</button>
+        </Link> 
+        <Link to="/" state={{ingredientList: {ingredientList}, spicy: {spicy}, sweet: {sweet}, salty: {salty}, bitter: {bitter}, rich: {rich}, umami: {umami}, sour: {sour} }}>
+          <button>Go Home</button>
+        </Link>
 
-      {recipeList.map((recipe) => (
-        <div>
-        <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link>
-        <RecipeCard recipe={recipe}/>
+        {/* <button>
+          {" "}
+          <Link to="/Flavors">Back</Link>{" "}
+        </button> */}
+        <button onClick={() => getRecipes(ingredientList, setRecipeList, spicy.spicy, sweet.sweet, salty.salty, bitter.bitter, rich.rich, umami.umami, sour.sour)}>
+          Get Recipes
+        </button>
 
-        </div>
-      ))}
+        {recipeList.map((recipe) => (
+          <div>
+          <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link>
+          <RecipeCard recipe={recipe}/>
+
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

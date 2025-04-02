@@ -1,23 +1,45 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-
 
 function Flavor() {
-  const [spicy, setSpicy] = useState(0); 
-  const [sweet, setSweet] = useState(0); 
-  const [salty, setSalty] = useState(0); 
-  const [bitter, setBitter] = useState(0); 
-  const [rich, setRich] = useState(0); 
-  const [umami, setUmami] = useState(0); 
-  const [sour, setSour] = useState(0); 
-
+  // tow cases: got to this page with next or back button. load data appropriately
+  
+  // attempt to catch 'back' button data
   const location = useLocation();
-  const {ingredientList} = location.state || {ingredientList: []}; // not used here. passed onto next page
-  const backIngredientsList = ingredientList.ingredientList;
+  const {flavorIngredientsList, flavorSpicy, flavorSweet, flavorSalty, flavorBitter, flavorRich, flavorUmami, flavorSour} = location.state || {ingredientList: [], flavorSpicy: 0, flavorSweet: 0, flavorSalty: 0, flavorBitter: 0, flavorRich: 0, flavorUmami: 0, flavorSour: 0};
+  var initialSpicy = (flavorSpicy != null) ? flavorSpicy.flavorSpicy : 0;
+  var initialSweet = (flavorSweet != null) ? flavorSweet.flavorSweet : 0;
+  var initialSalty = (flavorSalty != null) ? flavorSalty.flavorSalty : 0;
+  var initialBitter = (flavorBitter != null) ? flavorBitter.flavorBitter : 0;
+  var initialRich = (flavorRich != null) ? flavorRich.flavorRich : 0;
+  var initialUmami = (flavorUmami != null) ? flavorUmami.flavorUmami : 0;
+  var initialSour = (flavorSour != null) ? flavorSour.flavorSour : 0;
+    
+  // Case: it was 'back' button data. set initials here.
+  var initialIngredientList = [];
+  if (flavorIngredientsList != null && flavorIngredientsList.length != 0) {
+    initialIngredientList = flavorIngredientsList.flavorIngredientsList;
+  } else {
+    // get data from previous page (note that ingredientList is diff than one outside)
+    const {ingredientList} = location.state || {ingredientList: []}; // not used here. passed onto next page
+    initialIngredientList = ingredientList;
+  }
+  const ingredientList = initialIngredientList;
+
+  // initialize this page's variables
+  const [spicy, setSpicy] = useState(initialSpicy); 
+  const [sweet, setSweet] = useState(initialSweet);
+  const [salty, setSalty] = useState(initialSalty);
+  const [bitter, setBitter] = useState(initialBitter);
+  const [rich, setRich] = useState(initialRich);
+  const [umami, setUmami] = useState(initialUmami);
+  const [sour, setSour] = useState(initialSour);
+  
+  // setup 'back' button variables for previous page
+  const backIngredientsList = ingredientList;
   
   return (
     <div>

@@ -6,17 +6,18 @@ import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
 
 const Ingredients = () => {
-  // ingredientList might be passed backwards from a back button, called backIngredientsList
+  // catch 'back' button data
   const location = useLocation();
   const {backIngredientsList} = location.state || {backIngredientsList: []};
   var initialList = [];
   if (backIngredientsList != null && backIngredientsList.length != 0) {
-    initialList = backIngredientsList.backIngredientsList;
+    initialList = backIngredientsList.backIngredientsList.ingredientList;
   } 
 
+  // initialize this page's variables
   const [ingredientList, setIngredientList] = useState(initialList); // list of names of the ingredients the user selected
   const [searchResults, setSearchResults] = useState([]);            // output of search
-  
+
   return(
     <div>
       <IngredientsHeader />
