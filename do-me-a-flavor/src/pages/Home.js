@@ -25,25 +25,24 @@ function Title() {
 function Buttons() {
   return (
     <div className="buttons-con-outer">
-      <button 
-          className="btn btn-primary"
-      >
-        <Link to="/Ingredients">Let Me Cook!</Link>
-      </button>
+      <Link to="/Ingredients">
+        <button>Let Me Cook!</button>
+      </Link>
 
+      {/* fix: implement and remove 'disabled' */}
       <div className="row buttons-con-inner">
         <div className="col-4 justify-content-center">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" disabled>
             Drafts
           </button>
         </div>
         <div className="col-4 justify-content-center ">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" disabled>
             Cookbook
           </button>
         </div>
         <div className="col-4 justify-content-center ">
-          <button className="btn btn-primary">
+          <button className="btn btn-primary" disabled>
             Help
           </button>
         </div>

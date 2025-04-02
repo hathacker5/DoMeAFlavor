@@ -35,7 +35,7 @@ function RecipeList() {
         <Link to="/Flavors" state={{flavorIngredientsList: {flavorIngredientsList}, flavorSpicy: {flavorSpicy}, flavorSweet: {flavorSweet}, flavorSalty: {flavorSalty}, flavorBitter: {flavorBitter}, flavorRich: {flavorRich}, flavorUmami: {flavorUmami}, flavorSour: {flavorSour} }}>
           <button>Back</button>
         </Link> 
-        <Link to="/" state={{ingredientList: {ingredientList}, spicy: {spicy}, sweet: {sweet}, salty: {salty}, bitter: {bitter}, rich: {rich}, umami: {umami}, sour: {sour} }}>
+        <Link to="/">
           <button>Go Home</button>
         </Link>
 
