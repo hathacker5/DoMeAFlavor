@@ -1,19 +1,25 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BsPlusCircle } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
 
 const Ingredients = () => {
-  const [ingredientList, setIngredientList] = useState([]);     // list of names of the ingredients the user selected
-  const [searchResults, setSearchResults] = useState([]);       // output of search
+  // ingredientList might be passed backwards from a back button, called backIngredientsList
+  const location = useLocation();
+  const {backIngredientsList} = location.state || {backIngredientsList: []};
+  var initialList = [];
+  if (backIngredientsList != null && backIngredientsList.length != 0) {
+    initialList = backIngredientsList.backIngredientsList;
+  } 
+
+  const [ingredientList, setIngredientList] = useState(initialList); // list of names of the ingredients the user selected
+  const [searchResults, setSearchResults] = useState([]);            // output of search
   
   return(
     <div>
-      <Header />
-
-      {/* <MyButton list={ingredientList} /> */}
+      <IngredientsHeader />
 
       <button onClick={() => (setIngredientList([...ingredientList, "apple"]))}>Debug: Add apple</button>
       <p></p>
@@ -146,7 +152,7 @@ const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
     }
 };
 
-const Header = () => {
+const IngredientsHeader = () => {
   return (
     <div>
       <div className="row">
@@ -176,8 +182,6 @@ function handleIngredientsNext (e, isEmpty) {
   if (isEmpty) {
     e.preventDefault(); // Prevent the default link behavior (don't move)
     alert("Please pick at least one ingredient.");
-  } else {
-    console.log("Navigating to /Flavors");
   }
 };
 
