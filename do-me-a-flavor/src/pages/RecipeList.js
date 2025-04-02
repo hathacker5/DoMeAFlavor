@@ -12,7 +12,7 @@ function RecipeList() {
     // getting data from Flavor: ingredient list and flavor settings
     const location = useLocation();
     const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
-
+    
   return (
     <div className="container">
       <button>
@@ -24,7 +24,11 @@ function RecipeList() {
       </button>
 
       {recipeList.map((recipe) => (
-        <RecipeCard recipe={recipe} />
+        <div>
+        <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link>
+        <RecipeCard recipe={recipe}/>
+
+        </div>
       ))}
     </div>
   );
