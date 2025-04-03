@@ -101,7 +101,7 @@ const fetchSearchResults = async(searchQuery, setSearchResults) => {
   const options = {
     method: 'GET',
     headers: {
-      "x-rapidapi-key": "5e280eff54msh125ec8c51385101p131466jsne19c66db25b6",
+      "x-rapidapi-key": "de53ce264cmshed6bd56bbc93472p1bddc7jsnd607dc0f88ca",
       "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
     }
   };
