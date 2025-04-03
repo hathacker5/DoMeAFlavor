@@ -12,7 +12,7 @@ function RecipeList() {
   const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
 
   // catch 'back' button data
-  // todo
+  // NOPE turn it into a popup
 
   // initialize this page's variables
   const [recipeList, setRecipeList] = useState([]);
@@ -26,6 +26,9 @@ function RecipeList() {
   const flavorRich = rich.rich;
   const flavorUmami = umami.umami;
   const flavorSour = sour.sour;
+
+  // console.log("recipeList: flavorIngredientsList sending backwards is ", flavorIngredientsList);
+  // console.log("recipeList: ingredientList this is ", ingredientList);
   
   return (
     <div>
@@ -89,6 +92,8 @@ const RecipeCard = ({ recipe }) => {
 
 // returns a sorted list of recipes based on flavor profile match
 const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bitter, rich, umami, sour) => {
+  console.log("recipeList: ingredientList in getRecipes ", ingredientList);
+  
   const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${ingredientList.ingredientList.ingredientList}&number=10&ignorePantry=true&ranking=1`;
   const options = {
     method: "GET",
@@ -139,6 +144,9 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
   } catch (error) {
     console.error(error);
   }
+
+  console.log("recipeList: ingredientList getRecipes end ", ingredientList);
+
 };
 
 // fetches the flavor profile of an individual

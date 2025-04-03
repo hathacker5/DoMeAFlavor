@@ -8,15 +8,14 @@ import { useState } from "react";
 const Ingredients = () => {
   // catch 'back' button data
   const location = useLocation();
-  const {backIngredientsList} = location.state || {backIngredientsList: []};
-  var initialList = [];
-  if (backIngredientsList != null && backIngredientsList.length != 0) {
-    initialList = backIngredientsList.backIngredientsList.ingredientList;
-  } 
+  const {IngredientsIngredientsList} = (location.state && location.state.IngredientsIngredientsList) || {IngredientsIngredientsList: []};
 
   // initialize this page's variables
-  const [ingredientList, setIngredientList] = useState(initialList); // list of names of the ingredients the user selected
+  const [ingredientList, setIngredientList] = useState(IngredientsIngredientsList); // list of names of the ingredients the user selected
   const [searchResults, setSearchResults] = useState([]);            // output of search
+  
+  // console.log("ingredients: IngredientsIngredientsList got from forwards is ", IngredientsIngredientsList);
+  // console.log("ingredients: ingredientList is ", ingredientList);
 
   return(
     <div>

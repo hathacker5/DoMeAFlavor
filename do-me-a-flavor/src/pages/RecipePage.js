@@ -10,6 +10,7 @@ function RecipePage(){
     const [instructionList, setInstructionList] = useState([]);
     const location = useLocation();
     const { recipeData } = location.state || { recipeData: [] }
+    console.log("recipe page recipe data ", recipeData);
 
     const [buttonPopup, setButtonPopup] = useState(false);
     const [missingIngred, setMissingIngred] = useState(recipeData.recipe.missedIngredients);

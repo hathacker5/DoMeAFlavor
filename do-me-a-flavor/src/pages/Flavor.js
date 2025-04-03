@@ -5,8 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 
 function Flavor() {
-  // tow cases: got to this page with next or back button. load data appropriately
-  
+  // two cases: got to this page with next or back button. load data appropriately
   // attempt to catch 'back' button data
   const location = useLocation();
   const {flavorIngredientsList, flavorSpicy, flavorSweet, flavorSalty, flavorBitter, flavorRich, flavorUmami, flavorSour} = location.state || {ingredientList: [], flavorSpicy: 0, flavorSweet: 0, flavorSalty: 0, flavorBitter: 0, flavorRich: 0, flavorUmami: 0, flavorSour: 0};
@@ -22,10 +21,8 @@ function Flavor() {
   var initialIngredientList = [];
   if (flavorIngredientsList != null && flavorIngredientsList.length != 0) {
     initialIngredientList = flavorIngredientsList.flavorIngredientsList;
-  } else {
-    // get data from previous page (note that ingredientList is diff than one outside)
-    const {ingredientList} = location.state || {ingredientList: []}; // not used here. passed onto next page
-    initialIngredientList = ingredientList;
+  } else if (location.state) {
+    initialIngredientList = location.state.ingredientList.ingredientList;
   }
   const ingredientList = initialIngredientList;
 
@@ -39,14 +36,20 @@ function Flavor() {
   const [sour, setSour] = useState(initialSour);
   
   // setup 'back' button variables for previous page
-  const backIngredientsList = ingredientList;
+  const IngredientsIngredientsList = ingredientList;
+
+  // console.log("flavor: IngredientsIngredientsList sending backwards is ", IngredientsIngredientsList);
+  // console.log("flavor: flavorIngredientsList got from forwards is ", flavorIngredientsList);
+  // console.log("flavor: initialIngredientList setting this is ", initialIngredientList);
+  // console.log("flavor: ingredientList this is ", ingredientList);
+
   
   return (
     <div>
-      <FlavorHeader backIngredientsList={backIngredientsList} />
+      <FlavorHeader IngredientsIngredientsList={IngredientsIngredientsList} />
       <div className="container">
         {/* buttons */}
-        <Link to="/Ingredients" state={{backIngredientsList: {backIngredientsList}}}>
+        <Link to="/Ingredients" state={{IngredientsIngredientsList: {IngredientsIngredientsList}}}>
           <button>Back</button>
         </Link> 
         <Link to="/RecipeList" state={{ingredientList: {ingredientList}, spicy: {spicy}, sweet: {sweet}, salty: {salty}, bitter: {bitter}, rich: {rich}, umami: {umami}, sour: {sour} }}>
@@ -117,12 +120,12 @@ function Slider({name, flavor, setFlavor}) {
   );
 }
 
-const FlavorHeader = (backIngredientsList) => {
+const FlavorHeader = (IngredientsIngredientsList) => {
   return (
     <div>
       <div className="row">
         <div className="col-2">
-          <Link to="/Ingredients" state={{backIngredientsList: {backIngredientsList}}}>
+          <Link to="/Ingredients" state={{IngredientsIngredientsList: {IngredientsIngredientsList}}}>
             <button>Back</button>
           </Link> 
         </div>
