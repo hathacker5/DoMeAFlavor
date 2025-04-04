@@ -92,11 +92,11 @@ const RecipeCard = ({ recipe }) => {
 
 // returns a sorted list of recipes based on flavor profile match
 const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bitter, rich, umami, sour) => {
-  console.log("recipeList: ingredientList in getRecipes ", ingredientList);
+  console.log("recipeList: ingredientList in getRecipes ", ingredientList.ingredientList);
   
-  const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${ingredientList.ingredientList.ingredientList}&number=10&ignorePantry=true&ranking=1`;
+  const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${ingredientList.ingredientList}&number=10&ignorePantry=true&ranking=1`;
   const options = {
-    method: "GET",
+    method: "GET",  
     headers: {
       "x-rapidapi-key": "de53ce264cmshed6bd56bbc93472p1bddc7jsnd607dc0f88ca",
       "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -106,6 +106,7 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
   try {
     const response = await fetch(url, options);
     const result = await response.json();
+    console.log("recipe api call result", result);
 
     const recipeList = Object.entries(result).map(([index, value]) => value);
     for (var i = 0; i < recipeList.length; i++) {
