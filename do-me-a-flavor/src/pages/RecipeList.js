@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import { useLocation } from 'react-router-dom';
+import RecipePage from "./RecipePage";
 
 function RecipeList() {
   // get data from previous page: ingredient list and flavor settings
@@ -16,6 +17,8 @@ function RecipeList() {
 
   // initialize this page's variables
   const [recipeList, setRecipeList] = useState([]);
+
+  const [recipePageButtonPopup, setRecipePageButtonPopup] = useState(false);
 
   // setup 'back' button variables for previous page
   const flavorIngredientsList = ingredientList.ingredientList;
@@ -52,9 +55,12 @@ function RecipeList() {
 
         {recipeList.map((recipe) => (
           <div>
-          <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link>
+          {/* <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link> */}
           <RecipeCard recipe={recipe}/>
-
+          <button onClick={() => setRecipePageButtonPopup(true)}> Open {recipe.title} Recipe </button>
+          <RecipePage trigger={recipePageButtonPopup} setTrigger={setRecipePageButtonPopup} recipe={recipe} ingredientList={ingredientList}>
+            Recipe for {recipe.title}  
+          </RecipePage>
           </div>
         ))}
       </div>

@@ -6,14 +6,33 @@ import { useState } from "react";
 import SubstitutionPopup from "./SubstitutionPopup";
 
 
-function RecipePage(){
-    const [instructionList, setInstructionList] = useState([]);
-    const location = useLocation();
-    const { recipeData } = location.state || { recipeData: [] }
-    console.log("recipe page recipe data ", recipeData);
+function RecipePage(props){
+    
+    // const location = useLocation();
+    // const { recipeData } = location.state || { recipeData: [] }
+    // console.log("recipe page recipe data ", recipeData);
+    const recipe = props.recipe
 
+    return props.trigger ? (
+        <div className="popup">
+            <div className="popup-inner">
+                <button className="close-btn" onClick={() => props.setTrigger(false)}>
+                    Close Recipe.
+                </button>
+                {props.children}
+
+                <RecipePageCard originalIngredientList={props.ingredientList} recipe={recipe} />
+            </div>
+        </div>
+    ) : (
+        ""
+    );
+};
+
+const RecipePageCard = ({originalIngredientList, recipe}) => {
+    const [instructionList, setInstructionList] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
-    const [missingIngred, setMissingIngred] = useState(recipeData.recipe.missedIngredients);
+    const [missingIngred, setMissingIngred] = useState(recipe.missedIngredients);
     const [newIngred, setNewIngred] = useState([]);
 
     return (
@@ -22,9 +41,9 @@ function RecipePage(){
                 <button>Go Home</button>
             </Link>
             
-            <button onClick = {()=> fetchRecipeInstructions(recipeData.recipe.id, setInstructionList)}>display recipe</button>
-            <h1>{recipeData.recipe.title}</h1>
-            <img src= {recipeData.recipe.image}></img>
+            <button onClick = {()=> fetchRecipeInstructions(recipe.id, setInstructionList)}>display recipe</button>
+            <h1>{recipe.title}</h1>
+            <img src= {recipe.image}></img>
 
             <button onClick={() => setButtonPopup(true)}>Substitute Ingredients</button>
             
@@ -47,9 +66,8 @@ function RecipePage(){
                     </div>
                 ))}
         </div>
-    );
+    )
 };
-
 // function checkSubstitutions(recipe, setMissingIngred, newIngred, setNewIngred, setButtonPopup) {
 // //   setMissingIngred(recipe.missedIngredients);
 //   setButtonPopup(true);

@@ -37,7 +37,7 @@ const SubstitutionMenu = ({
   
   useEffect(() => {
     if (missing) {
-        getAlternatives(missing)
+        getAlternatives(missing, setLoadingAlternatives)
             .then((alts) => setAlternatives(alts))
             .finally(setLoadingAlternatives(false));
     }
