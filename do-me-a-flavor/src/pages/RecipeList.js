@@ -7,60 +7,40 @@ import Col from "react-bootstrap/Col";
 import { useLocation } from 'react-router-dom';
 import RecipePage from "./RecipePage";
 
-function RecipeList() {
-  // get data from previous page: ingredient list and flavor settings
-  const location = useLocation();
-  const {ingredientList, spicy, sweet, salty, bitter, rich, umami, sour} = location.state || {ingredientList: [], spicy: 0, sweet: 0, salty: 0, bitter: 0, rich: 0, umami: 0, sour: 0};
-
-  // catch 'back' button data
-  // NOPE turn it into a popup
-
-  // initialize this page's variables
-  const [recipeList, setRecipeList] = useState([]);
+function RecipeList(props) {
+  const userIngredientList = props.userIngredientList;
+  const setUserIngredientList = props.setUserIngredientList;
+  const userFlavorPreference = props.userFlavorPreference;
+  const setUserFlavorPreference = props.setUserFlavorPreference;
+  const userRecipeList = props.userRecipeList;
+  const setUserRecipeList = props.setUserRecipeList;
 
   const [recipePageButtonPopup, setRecipePageButtonPopup] = useState(false);
-
-  // setup 'back' button variables for previous page
-  const flavorIngredientsList = ingredientList.ingredientList;
-  const flavorSpicy = spicy.spicy;
-  const flavorSweet = sweet.sweet;
-  const flavorSalty = salty.salty;
-  const flavorBitter = bitter.bitter;
-  const flavorRich = rich.rich;
-  const flavorUmami = umami.umami;
-  const flavorSour = sour.sour;
-
-  // console.log("recipeList: flavorIngredientsList sending backwards is ", flavorIngredientsList);
-  // console.log("recipeList: ingredientList this is ", ingredientList);
   
   return (
     <div>
       {/* RecipeListHeader todo */}
       <div className="container">
         {/* buttons */}
-        <Link to="/Flavors" state={{flavorIngredientsList: {flavorIngredientsList}, flavorSpicy: {flavorSpicy}, flavorSweet: {flavorSweet}, flavorSalty: {flavorSalty}, flavorBitter: {flavorBitter}, flavorRich: {flavorRich}, flavorUmami: {flavorUmami}, flavorSour: {flavorSour} }}>
+        <Link to="/Flavors">
           <button>Back</button>
         </Link> 
         <Link to="/">
           <button>Go Home</button>
         </Link>
 
-        {/* <button>
-          {" "}
-          <Link to="/Flavors">Back</Link>{" "}
-        </button> */}
-        <button onClick={() => getRecipes(ingredientList, setRecipeList, spicy.spicy, sweet.sweet, salty.salty, bitter.bitter, rich.rich, umami.umami, sour.sour)}>
+        <button onClick={() => getRecipes(userIngredientList, setUserIngredientList, userFlavorPreference, setUserFlavorPreference, userRecipeList, setUserRecipeList)}>
           Get Recipes
         </button>
 
-        {recipeList.map((recipe) => (
+        {userRecipeList.map((recipe) => (
           <div>
-          {/* <Link to={`/recipe/${recipe.id}`} state={{recipeData : {recipe}}}>   Click me     </Link> */}
-          <RecipeCard recipe={recipe}/>
-          <button onClick={() => setRecipePageButtonPopup(true)}> Open {recipe.title} Recipe </button>
-          <RecipePage trigger={recipePageButtonPopup} setTrigger={setRecipePageButtonPopup} recipe={recipe} ingredientList={ingredientList}>
-            Recipe for {recipe.title}  
-          </RecipePage>
+            <RecipeCard recipe={recipe}/>
+
+            <button onClick={() => setRecipePageButtonPopup(true)}> Open Recipe for {recipe.title}. </button>
+            <RecipePage trigger={recipePageButtonPopup} setTrigger={setRecipePageButtonPopup} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
+              Recipe for {recipe.title}  
+            </RecipePage>
           </div>
         ))}
       </div>
@@ -97,10 +77,8 @@ const RecipeCard = ({ recipe }) => {
 };
 
 // returns a sorted list of recipes based on flavor profile match
-const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bitter, rich, umami, sour) => {
-  console.log("recipeList: ingredientList in getRecipes ", ingredientList.ingredientList);
-  
-  const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${ingredientList.ingredientList}&number=10&ignorePantry=true&ranking=1`;
+const getRecipes = async (userIngredientList, setUserIngredientList, userFlavorPreference, setUserFlavorPreference, userRecipeList, setUserRecipeList) => {
+  const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${userIngredientList}&number=10&ignorePantry=true&ranking=1`;
   const options = {
     method: "GET",  
     headers: {
@@ -112,14 +90,12 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    console.log("recipe api call result", result);
 
     const recipeList = Object.entries(result).map(([index, value]) => value);
     for (var i = 0; i < recipeList.length; i++) {
       const recipe = recipeList[i];
       
-      // await waits for the api call to return and for the function to give an actual
-      // result
+      // await waits for the api call to return and for the function to give an actual result
       var flavors = await getFlavorProfile(recipe.id);
 
       if (flavors == []) {
@@ -129,14 +105,14 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
       } else {
         // Calculates score
         var score = 0.0;
-        score += 100 - Math.abs(flavors.bitterness - bitter);
-        score += 100 - Math.abs(flavors.fattiness - rich);
-        score += 100 - Math.abs(flavors.saltiness - salty);
-        score += 100 - Math.abs(flavors.sourness - sour);
+        score += 100 - Math.abs(flavors.bitterness - userFlavorPreference.get("Bitter"));
+        score += 100 - Math.abs(flavors.fattiness - userFlavorPreference.get("Rich"));
+        score += 100 - Math.abs(flavors.saltiness - userFlavorPreference.get("Salty"));
+        score += 100 - Math.abs(flavors.sourness - userFlavorPreference.get("Sour"));
         const maxSpicy = 4500000;
-        score += 100 - Math.abs((Math.min(flavors.spiciness, maxSpicy) / maxSpicy) * 100 - spicy);
-        score += 100 - Math.abs(flavors.sweetness - sweet);
-        score += 100 - Math.abs(flavors.savoriness - umami);
+        score += 100 - Math.abs((Math.min(flavors.spiciness, maxSpicy) / maxSpicy) * 100 - userFlavorPreference.get("Spicy"));
+        score += 100 - Math.abs(flavors.sweetness - userFlavorPreference.get("Sweet"));
+        score += 100 - Math.abs(flavors.savoriness - userFlavorPreference.get("Umami"));
         score /= 7;
 
         // Saves score to recipe json entry in recipeList
@@ -147,13 +123,10 @@ const getRecipes = async (ingredientList, setRecipeList, spicy, sweet, salty, bi
     // sort list
     const sortedList = [...recipeList].sort((a, b) => b.score - a.score);
     
-    setRecipeList(sortedList);
+    setUserRecipeList(sortedList);
   } catch (error) {
     console.error(error);
   }
-
-  console.log("recipeList: ingredientList getRecipes end ", ingredientList);
-
 };
 
 // fetches the flavor profile of an individual

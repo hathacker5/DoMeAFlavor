@@ -4,71 +4,37 @@ import { Link, useLocation } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 
-function Flavor() {
-  // two cases: got to this page with next or back button. load data appropriately
-  // attempt to catch 'back' button data
-  const location = useLocation();
-  const {flavorIngredientsList, flavorSpicy, flavorSweet, flavorSalty, flavorBitter, flavorRich, flavorUmami, flavorSour} = location.state || {ingredientList: [], flavorSpicy: 0, flavorSweet: 0, flavorSalty: 0, flavorBitter: 0, flavorRich: 0, flavorUmami: 0, flavorSour: 0};
-  var initialSpicy = (flavorSpicy != null) ? flavorSpicy.flavorSpicy : 0;
-  var initialSweet = (flavorSweet != null) ? flavorSweet.flavorSweet : 0;
-  var initialSalty = (flavorSalty != null) ? flavorSalty.flavorSalty : 0;
-  var initialBitter = (flavorBitter != null) ? flavorBitter.flavorBitter : 0;
-  var initialRich = (flavorRich != null) ? flavorRich.flavorRich : 0;
-  var initialUmami = (flavorUmami != null) ? flavorUmami.flavorUmami : 0;
-  var initialSour = (flavorSour != null) ? flavorSour.flavorSour : 0;
-    
-  // Case: it was 'back' button data. set initials here.
-  var initialIngredientList = [];
-  if (flavorIngredientsList != null && flavorIngredientsList.length != 0) {
-    initialIngredientList = flavorIngredientsList.flavorIngredientsList;
-  } else if (location.state) {
-    initialIngredientList = location.state.ingredientList.ingredientList;
-  }
-  const ingredientList = initialIngredientList;
-
-  // initialize this page's variables
-  const [spicy, setSpicy] = useState(initialSpicy); 
-  const [sweet, setSweet] = useState(initialSweet);
-  const [salty, setSalty] = useState(initialSalty);
-  const [bitter, setBitter] = useState(initialBitter);
-  const [rich, setRich] = useState(initialRich);
-  const [umami, setUmami] = useState(initialUmami);
-  const [sour, setSour] = useState(initialSour);
-  
-  // setup 'back' button variables for previous page
-  const IngredientsIngredientsList = ingredientList;
-
-  // console.log("flavor: IngredientsIngredientsList sending backwards is ", IngredientsIngredientsList);
-  // console.log("flavor: flavorIngredientsList got from forwards is ", flavorIngredientsList);
-  // console.log("flavor: initialIngredientList setting this is ", initialIngredientList);
-  // console.log("flavor: ingredientList this is ", ingredientList);
-
+function Flavor(props) {
+  const userFlavorPreference = props.userFlavorPreference;
+  const setUserFlavorPreference = props.setUserFlavorPreference;
   
   return (
     <div>
-      <FlavorHeader IngredientsIngredientsList={IngredientsIngredientsList} />
+      <FlavorHeader />
       <div className="container">
-        {/* buttons */}
-        <Link to="/Ingredients" state={{IngredientsIngredientsList: {IngredientsIngredientsList}}}>
+        <Link to="/Ingredients">
           <button>Back</button>
         </Link> 
-        <Link to="/RecipeList" state={{ingredientList: {ingredientList}, spicy: {spicy}, sweet: {sweet}, salty: {salty}, bitter: {bitter}, rich: {rich}, umami: {umami}, sour: {sour} }}>
+        <Link to="/RecipeList">
           <button>Next</button>
         </Link>
-        
-        <SingleFlavor name="Spicy" flavor={spicy} setFlavor={setSpicy} />
-        <SingleFlavor name="Sweet" flavor = {sweet} setFlavor={setSweet} /> 
-        <SingleFlavor name="Salty" flavor={salty} setFlavor={setSalty}/>
-        <SingleFlavor name="Bitter" flavor={bitter} setFlavor={setBitter} />
-        <SingleFlavor name="Rich" flavor={rich} setFlavor={setRich} />
-        <SingleFlavor name="Umami" flavor={umami} setFlavor={setUmami} />
-        <SingleFlavor name="Sour" flavor={sour} setFlavor={setSour}/>
+
+        {console.log(userFlavorPreference)}
+        {Object.entries(userFlavorPreference).map(([flavor, preference]) => (
+          <SingleFlavor
+            key={flavor}
+            name={flavor}
+            preference={preference}
+            userFlavorPreference={userFlavorPreference}
+            setUserFlavorPreference={setUserFlavorPreference}
+          />
+        ))}
 
         {/* buttons, repeated */}
-        <Link to="/Ingredients" state={{ingredientList}}>
+        <Link to="/Ingredients">
           <button>Back</button>
         </Link> 
-        <Link to="/RecipeList" state={{ingredientList: {ingredientList}, spicy: {spicy}, sweet: {sweet}, salty: {salty}, bitter: {bitter}, rich: {rich}, umami: {umami}, sour: {sour} }}>
+        <Link to="/RecipeList">
           <button>Next</button>
         </Link>
       </div>
@@ -77,7 +43,8 @@ function Flavor() {
 }
 
 // todo add image
-const SingleFlavor = ({ name, flavor, setFlavor, image }) => {
+const SingleFlavor = ({ name, preference, userFlavorPreference, setUserFlavorPreference}) => {
+  console.log(name, preference);
   return (
     <div>
       <div className="row">
@@ -88,7 +55,7 @@ const SingleFlavor = ({ name, flavor, setFlavor, image }) => {
         <div className="col-9">
           <div className="row"><p>{name}</p></div>
           <div className="row">
-            <Slider name={name} flavor={flavor} setFlavor={setFlavor} />
+            <Slider name={name} preference={preference} userFlavorPreference={userFlavorPreference} setUserFlavorPreference={setUserFlavorPreference} />
           </div>
         </div>
       </div>
@@ -96,12 +63,16 @@ const SingleFlavor = ({ name, flavor, setFlavor, image }) => {
   );
 };
 
-function Slider({name, flavor, setFlavor}) {
+function Slider({name, preference, userFlavorPreference, setUserFlavorPreference}) {
+  
   const handleSliderChange = (e) => {
-      setFlavor(e.target.value);
+    setUserFlavorPreference(prev => ({
+      ...prev,
+      [name]: e.target.value,
+    }));
   };
 
-  var classname="custom-slider slider icon_"+name.toLowerCase();
+  var className = "custom-slider slider icon_" + name.toLowerCase();
 
   return (
       <div className="outer">
@@ -110,22 +81,22 @@ function Slider({name, flavor, setFlavor}) {
                   Range Slider
               </Form.Label>
               <Form.Range
-                  value={flavor}
+                  value={preference}
                   name='hello'
                   onChange={handleSliderChange}
-                  className={classname}/>
-              <p>Selected Value: {flavor}</p>
+                  className={className}/>
+              <p>Selected Value: {preference}</p>
           </div>
       </div>
   );
 }
 
-const FlavorHeader = (IngredientsIngredientsList) => {
+const FlavorHeader = () => {
   return (
     <div>
       <div className="row">
         <div className="col-2">
-          <Link to="/Ingredients" state={{IngredientsIngredientsList: {IngredientsIngredientsList}}}>
+          <Link to="/Ingredients">
             <button>Back</button>
           </Link> 
         </div>

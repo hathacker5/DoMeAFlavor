@@ -13,6 +13,8 @@ function SubstitutionPopup(props) {
         <SubstitutionMenu
           missingIngred={props.missingIngred}
           setMissingIngred={props.setMissingIngred}
+          originalIngredientList={props.originalIngredientList}
+          setOriginalIngredientList={props.setOriginalIngredientList}
           newIngred={props.newIngred}
           setNewIngred={props.setNewIngred}
         />
@@ -26,7 +28,9 @@ function SubstitutionPopup(props) {
 const SubstitutionMenu = ({
   missingIngred,
   setMissingIngred,
-  setNewIngred,
+  originalIngredientList,
+  newIngred,
+  setNewIngred
 }) => {
   
   const [loadingAlternatives, setLoadingAlternatives] = useState(true);
@@ -71,6 +75,10 @@ const SubstitutionMenu = ({
                 console.log("missing after button click", missingIngred);
                 setNewIngred((prev) => [...prev, `Substitute ${missing} with ${alt}`]);
                 console.log("new after button click");
+
+                console.log("Original ingredient list before button click", originalIngredientList)
+                setOriginalIngredientList((prev) => [...prev, `${alt}`]);
+                console.log("Original ingredient list after button click", originalIngredientList);
             }}
             >
             {alt}

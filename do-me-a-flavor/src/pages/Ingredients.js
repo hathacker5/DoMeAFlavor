@@ -5,63 +5,46 @@ import { BsPlusCircle } from "react-icons/bs";
 import { BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
 
-const Ingredients = () => {
-  // catch 'back' button data
-  const location = useLocation();
-  const {IngredientsIngredientsList} = (location.state && location.state.IngredientsIngredientsList) || {IngredientsIngredientsList: []};
+function Ingredients(props) {
+  const userIngredientList = props.userIngredientList;
+  const setUserIngredientList = props.setUserIngredientList;
 
-  // initialize this page's variables
-  const [ingredientList, setIngredientList] = useState(IngredientsIngredientsList); // list of names of the ingredients the user selected
-  const [searchResults, setSearchResults] = useState([]);            // output of search
-  
-  // console.log("ingredients: IngredientsIngredientsList got from forwards is ", IngredientsIngredientsList);
-  // console.log("ingredients: ingredientList is ", ingredientList);
+  const [searchResults, setSearchResults] = useState([]);
 
-  return(
+  return (
     <div>
       <IngredientsHeader />
-
-      <button onClick={() => (setIngredientList([...ingredientList, "apple"]))}>Debug: Add apple</button>
-      <p></p>
-
-      <div classname = "container">
-        <SearchBox searchResults={searchResults} setSearchResults={setSearchResults}></SearchBox>
+      <div className="container">
+        
+        <SearchBox searchResults={searchResults} setSearchResults={setSearchResults} />
 
         {searchResults.length > 0 ? (
           searchResults.map((item) => (
             <IngredientItem
                 name={item.name}
                 image={item.image}
-                ingredientList={ingredientList}
-                setIngredientList={setIngredientList}
+                ingredientList={userIngredientList}
+                setIngredientList={setUserIngredientList}
             />
           ))
         ) : (
-          // error handling
           <p>Couldn't find any ingredients</p>
         )}
 
-        <p>My Ingredients: {ingredientList.length > 0 ? ingredientList.join(", ") : "search to add ingredients"}.</p>
-
-        <br />
-        
-        {/* buttons */}
+        <p>My Ingredients: {userIngredientList.length > 0 ? userIngredientList.join(", ") : "Search to add ingredients"}.</p>
 
         <Link to="/">
           <button>Back</button>
         </Link> 
 
-        <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, ingredientList.length === 0)} 
-            state={{ingredientList: {ingredientList}}}>  
+        <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, userIngredientList.length === 0)}>  
           <button>Next</button>
         </Link>
-        
-        <br />
+
       </div>
     </div>
   )
-}
-
+};
 
 export function SearchBox({ searchResults, setSearchResults }) {
   const [searchText, setSearchText] = useState('');

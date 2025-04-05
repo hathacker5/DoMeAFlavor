@@ -21,7 +21,7 @@ function RecipePage(props){
                 </button>
                 {props.children}
 
-                <RecipePageCard originalIngredientList={props.ingredientList} recipe={recipe} />
+                <RecipePageCard originalIngredientList={props.ingredientList} setOriginalIngredientList={props.setIngredientList} recipe={recipe} />
             </div>
         </div>
     ) : (
@@ -29,7 +29,7 @@ function RecipePage(props){
     );
 };
 
-const RecipePageCard = ({originalIngredientList, recipe}) => {
+const RecipePageCard = ({originalIngredientList, setOriginalIngredientList, recipe}) => {
     const [instructionList, setInstructionList] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [missingIngred, setMissingIngred] = useState(recipe.missedIngredients);
@@ -48,7 +48,7 @@ const RecipePageCard = ({originalIngredientList, recipe}) => {
             <button onClick={() => setButtonPopup(true)}>Substitute Ingredients</button>
             
             <SubstitutionPopup trigger={buttonPopup} setTrigger={setButtonPopup} missingIngred={missingIngred} setMissingIngred = {setMissingIngred}
-                newIngred={newIngred} setNewIngred={setNewIngred}>
+                originalIngredientList={originalIngredientList} setOriginalIngredientList={setOriginalIngredientList} newIngred={newIngred} setNewIngred={setNewIngred}>
                 <h3>My popup.</h3>
             </SubstitutionPopup>
 
