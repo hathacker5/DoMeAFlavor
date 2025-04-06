@@ -37,6 +37,8 @@ function RecipePageCard (props) {
     const [buttonPopup, setButtonPopup] = useState(false);
     const [missingIngred, setMissingIngred] = useState(recipe.missedIngredients);
     const [newIngred, setNewIngred] = useState([]);
+    const [recipeIngred, setRecipeIngred] = useState([]);
+
 
     return (
         <div>
@@ -44,7 +46,7 @@ function RecipePageCard (props) {
                 <button>Go Home</button>
             </Link>
             
-            <button onClick = {()=> fetchRecipeInstructions(recipe.id, setInstructionList)}>Display Recipe.</button>
+            <button onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)}>Display Recipe.</button>
             <h1>{recipe.title}</h1>
             <img src= {recipe.image}></img>
 
@@ -62,6 +64,18 @@ function RecipePageCard (props) {
                     </div>
                 ))}
 
+            
+            <h1>Ingredients</h1>
+            <ul>
+                {recipeIngred.map((item, index) => (
+                    <li key={index}>
+                        <p>{item.name}</p>
+                    </li>
+                ))}
+            </ul>
+
+            <h1>Directions</h1>
+
             {instructionList.map((step, index) => (
                     <div>
                     <h2>Step {step.index}</h2>
@@ -71,6 +85,36 @@ function RecipePageCard (props) {
         </div>
     )
 };
+
+const handleDisplayOnClick = (recipeID, setInstructionList, setRecipeIngred) => {
+    fetchRecipeInstructions(recipeID, setInstructionList);
+    fetchRecipeIngreds(recipeID, setRecipeIngred);
+}
+
+
+
+const fetchRecipeIngreds = async (recipeID, setRecipeIngred) => {
+    const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/ingredientWidget.json`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': 'de53ce264cmshed6bd56bbc93472p1bddc7jsnd607dc0f88ca',
+            'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+
+        console.log(result);
+        setRecipeIngred(result.ingredients);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
 
 const fetchRecipeInstructions = async (recipeID, setInstructionList) => {
     const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/analyzedInstructions?stepBreakdown=true`;

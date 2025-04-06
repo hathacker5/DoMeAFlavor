@@ -73,6 +73,8 @@ const RecipeCard = ({ recipe, setRecipePageButtonPopup }) => {
           marginBottom: "10px",
           borderRadius: "25px",
           borderWidth: "4px",
+          paddingLeft: "0px",
+          marginLeft: "0px",
         }}
       >
         <Card.Body>

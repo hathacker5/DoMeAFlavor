@@ -6,6 +6,14 @@
   padding: 5%;
   font-size: 300%;
 }
+
+.card {
+  width: 100%;
+  word-wrap: break-word;
+  padding-left: 0px;
+}
+
+
 .title-con {
   background-color: #2BC1CC;
   text-align: center;
