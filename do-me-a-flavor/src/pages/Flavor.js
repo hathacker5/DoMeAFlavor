@@ -10,6 +10,7 @@ function Flavor(props) {
   
   return (
     <div>
+      {console.log(userFlavorPreference)}
       <FlavorHeader />
       <div className="container">
         <Link to="/Ingredients">
@@ -19,8 +20,7 @@ function Flavor(props) {
           <button>Next</button>
         </Link>
 
-        {console.log(userFlavorPreference)}
-        {Object.entries(userFlavorPreference).map(([flavor, preference]) => (
+        {Array.from(userFlavorPreference.entries()).map(([flavor, preference]) => (
           <SingleFlavor
             key={flavor}
             name={flavor}
@@ -43,14 +43,14 @@ function Flavor(props) {
 }
 
 // todo add image
-const SingleFlavor = ({ name, preference, userFlavorPreference, setUserFlavorPreference}) => {
-  console.log(name, preference);
+const SingleFlavor = ( {name, preference, userFlavorPreference, setUserFlavorPreference} ) => {
   return (
     <div>
       <div className="row">
         <div className="col-3">
           {/* <img src="images/"></img> */}
         </div>
+        {console.log(name, preference)}
 
         <div className="col-9">
           <div className="row"><p>{name}</p></div>
@@ -66,10 +66,11 @@ const SingleFlavor = ({ name, preference, userFlavorPreference, setUserFlavorPre
 function Slider({name, preference, userFlavorPreference, setUserFlavorPreference}) {
   
   const handleSliderChange = (e) => {
-    setUserFlavorPreference(prev => ({
-      ...prev,
-      [name]: e.target.value,
-    }));
+    setUserFlavorPreference(prev => {
+      const newMap = new Map(prev);
+      newMap.set(name, e.target.value);
+      return newMap;
+    });
   };
 
   var className = "custom-slider slider icon_" + name.toLowerCase();
@@ -82,7 +83,7 @@ function Slider({name, preference, userFlavorPreference, setUserFlavorPreference
               </Form.Label>
               <Form.Range
                   value={preference}
-                  name='hello'
+                  name={name}
                   onChange={handleSliderChange}
                   className={className}/>
               <p>Selected Value: {preference}</p>

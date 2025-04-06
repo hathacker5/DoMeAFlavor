@@ -7,11 +7,9 @@ import SubstitutionPopup from "./SubstitutionPopup";
 
 
 function RecipePage(props){
-    
-    // const location = useLocation();
-    // const { recipeData } = location.state || { recipeData: [] }
-    // console.log("recipe page recipe data ", recipeData);
-    const recipe = props.recipe
+    const recipe = props.recipe;
+    const userIngredientList = props.userIngredientList;
+    const setUserIngredientList = props.setUserIngredientList;
 
     return props.trigger ? (
         <div className="popup">
@@ -19,9 +17,10 @@ function RecipePage(props){
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>
                     Close Recipe.
                 </button>
+
                 {props.children}
 
-                <RecipePageCard originalIngredientList={props.ingredientList} setOriginalIngredientList={props.setIngredientList} recipe={recipe} />
+                <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} />
             </div>
         </div>
     ) : (
@@ -29,7 +28,11 @@ function RecipePage(props){
     );
 };
 
-const RecipePageCard = ({originalIngredientList, setOriginalIngredientList, recipe}) => {
+function RecipePageCard (props) {
+    const recipe = props.recipe;
+    const userIngredientList = props.userIngredientList;
+    const setUserIngredientList = props.setUserIngredientList;
+
     const [instructionList, setInstructionList] = useState([]);
     const [buttonPopup, setButtonPopup] = useState(false);
     const [missingIngred, setMissingIngred] = useState(recipe.missedIngredients);
@@ -41,14 +44,14 @@ const RecipePageCard = ({originalIngredientList, setOriginalIngredientList, reci
                 <button>Go Home</button>
             </Link>
             
-            <button onClick = {()=> fetchRecipeInstructions(recipe.id, setInstructionList)}>display recipe</button>
+            <button onClick = {()=> fetchRecipeInstructions(recipe.id, setInstructionList)}>Display Recipe.</button>
             <h1>{recipe.title}</h1>
             <img src= {recipe.image}></img>
 
             <button onClick={() => setButtonPopup(true)}>Substitute Ingredients</button>
             
             <SubstitutionPopup trigger={buttonPopup} setTrigger={setButtonPopup} missingIngred={missingIngred} setMissingIngred = {setMissingIngred}
-                originalIngredientList={originalIngredientList} setOriginalIngredientList={setOriginalIngredientList} newIngred={newIngred} setNewIngred={setNewIngred}>
+            newIngred={newIngred} setNewIngred={setNewIngred} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
                 <h3>My popup.</h3>
             </SubstitutionPopup>
 
@@ -68,10 +71,6 @@ const RecipePageCard = ({originalIngredientList, setOriginalIngredientList, reci
         </div>
     )
 };
-// function checkSubstitutions(recipe, setMissingIngred, newIngred, setNewIngred, setButtonPopup) {
-// //   setMissingIngred(recipe.missedIngredients);
-//   setButtonPopup(true);
-//   }
 
 const fetchRecipeInstructions = async (recipeID, setInstructionList) => {
     const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeID}/analyzedInstructions?stepBreakdown=true`;

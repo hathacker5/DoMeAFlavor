@@ -29,6 +29,7 @@ function RecipeList(props) {
           <button>Go Home</button>
         </Link>
 
+        {console.log("userFlavorPreference", userFlavorPreference)}
         <button onClick={() => getRecipes(userIngredientList, setUserIngredientList, userFlavorPreference, setUserFlavorPreference, userRecipeList, setUserRecipeList)}>
           Get Recipes
         </button>
