@@ -1,8 +1,7 @@
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useLocation } from "react-router-dom";
-import { BsPlusCircle } from "react-icons/bs";
-import { BsDashCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { BsPlusCircle, BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
 
 function Ingredients(props) {
@@ -15,32 +14,55 @@ function Ingredients(props) {
     <div>
       <IngredientsHeader />
       <div className="container">
-        
-        <SearchBox searchResults={searchResults} setSearchResults={setSearchResults} />
+          
+        <button onClick={() => (setUserIngredientList([...userIngredientList, "apple"]))}>Debug: Add apple</button>
+        <button onClick={() => (setUserIngredientList([...userIngredientList, "butter"]))}>Debug: Add butter</button>
+        <button onClick={() => (setUserIngredientList([...userIngredientList, "walnuts"]))}>Debug: Add walnuts</button>
 
-        {searchResults.length > 0 ? (
-          searchResults.map((item) => (
-            <IngredientItem
-                name={item.name}
-                image={item.image}
-                ingredientList={userIngredientList}
-                setIngredientList={setUserIngredientList}
-            />
-          ))
-        ) : (
-          <p>Couldn't find any ingredients</p>
-        )}
 
-        <p>My Ingredients: {userIngredientList.length > 0 ? userIngredientList.join(", ") : "Search to add ingredients"}.</p>
+        <div className = "ingreds-con">
+          <div className="search-input-con">
+            <SearchBox searchResults={searchResults} setSearchResults={setSearchResults} />
+          </div>
 
-        <Link to="/">
-          <button>Back</button>
-        </Link> 
+          <div className="search-results-con">
+            {searchResults.length > 0 ? (
+              searchResults.map((item) => (
+                <IngredientItem
+                    name={item.name}
+                    image={item.image}
+                    ingredientList={userIngredientList}
+                    setIngredientList={setUserIngredientList}
+                />
+              ))
+            ) : (
+              // error handling
+              <p className="ingred-err">Couldn't find any ingredients</p>
+            )}
+          </div>
 
-        <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, userIngredientList.length === 0)}>  
-          <button>Next</button>
-        </Link>
+          <p><br/>My Ingredients:</p>
+          <CurrentIngredients 
+            list={userIngredientList} 
+            ingredientList={userIngredientList}
+            setIngredientList={setUserIngredientList}
+          />
 
+          {/* buttons */}
+          <div className="footer-buttons-con">
+            <div className="footer-back">
+              <Link to="/">
+                <button className="btn btn-primary" >Back</button>
+              </Link> 
+            </div>
+            <div className="footer-next">
+              <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, userIngredientList.length === 0)} 
+                  state={{userIngredientList: {userIngredientList}}}>  
+                <button className="btn btn-primary" >Next</button>
+              </Link>
+            </div>
+          </div> 
+        </div>
       </div>
     </div>
   )
@@ -102,6 +124,7 @@ const fetchSearchResults = async(searchQuery, setSearchResults) => {
   }
 };
 
+
 // renders the name, image, and description of one ingredient
 const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
   return (
@@ -116,8 +139,8 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
           </div>
         </div>
         <div className="col-1">
-          <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } > 
-            {ingredientList.includes(name) ? <BsDashCircle /> : <BsPlusCircle /> }
+          <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } className="add-rm-button" > 
+            {ingredientList.includes(name) ? <BsDashCircle className="color-red" /> : <BsPlusCircle className="color-green" /> }
           </button>
         </div>
       </div>
@@ -125,36 +148,71 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
   )
 }
 
+// each item in CurrentIngredients
+const CurrentIngredientItem = ({ name, ingredientList, setIngredientList }) => {
+  return (
+    <div className="ingreds-item" >
+      <div className="ingreds-item-name">
+        <p>{name}</p>
+      </div>
+      <div className="ingreds-item-btn">
+        <button onClick ={() => (setIngredientList(ingredientList.filter(ingredient => ingredient !== name)))} className="add-rm-button">
+          <BsDashCircle className="color-red" /> 
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// displays current ingredients and allows user to remove them
+function CurrentIngredients({ list, ingredientList, setIngredientList }) {
+  if (list.length > 0) {
+    return (
+      <div className="ingreds-list">
+        {list.map((item, index) => (
+          <CurrentIngredientItem name={item} ingredientList={ingredientList} setIngredientList={setIngredientList} />
+        ))}
+      </div>
+    );
+  } else {
+    return (
+    <p className="ingred-err">
+      search to add ingredients
+    </p> 
+    );
+  }
+}
+
 const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
-    if (ingredientList.includes(name)) {
-        // remove
-        setIngredientList(ingredientList.filter(ingredient => ingredient !== name));
-    } else {
-        // add
-        setIngredientList([...ingredientList, name]);
-    }
+  if (ingredientList.includes(name)) {
+    // remove
+    setIngredientList(ingredientList.filter(ingredient => ingredient !== name));
+  } else {
+    // add
+    setIngredientList([...ingredientList, name]);
+  }
 };
 
 const IngredientsHeader = () => {
   return (
-    <div>
-      <div className="row">
-        <div className="col-2">
+    <div className="header">
+      <div className="header-buttons-con">
+        <div className="nav-button">
           <Link to="/">
-          <button>Back</button>
+          <button className="btn btn-primary" >Back</button>
           </Link>
         </div>
-        <div className="col-2">
+        <div className="nav-button">
           <Link to="/">
-          <button>Home</button>
+          <button className="btn btn-primary" >Home</button>
           </Link>
         </div>
-        <div className="col-8"></div>
+        <div className="header-recipe">
+          <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button>
+        </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          Customize Your Flavor Profile
-        </div>
+      <div className="header-title">
+        Customize Your Flavor Profile
       </div>
     </div>
   );

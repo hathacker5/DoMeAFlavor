@@ -25,24 +25,25 @@ function Title() {
 function Buttons() {
   return (
     <div className="buttons-con-outer">
-      <Link to="/Ingredients">
-        <button>Let Me Cook!</button>
-      </Link>
+      <div className="button-start-con">
+        <Link to="/Ingredients">
+          <button className="btn btn-primary button-start" >Let Me Cook!</button>
+        </Link>
+      </div>
 
-      {/* fix: implement and remove 'disabled' */}
-      <div className="row buttons-con-inner">
-        <div className="col-4 justify-content-center">
-          <button className="btn btn-primary" disabled>
+      <div className=" buttons-con-inner">
+        <div className=" justify-content-center">
+          <button className="btn btn-primary" onClick={() => alert("Drafts feature coming soon!")}>
             Drafts
           </button>
         </div>
-        <div className="col-4 justify-content-center ">
-          <button className="btn btn-primary" disabled>
+        <div className="justify-content-center ">
+          <button className="btn btn-primary" onClick={() => alert("Cookbook feature coming soon!")}>
             Cookbook
           </button>
         </div>
-        <div className="col-4 justify-content-center ">
-          <button className="btn btn-primary" disabled>
+        <div className="justify-content-center ">
+          <button className="btn btn-primary" onClick={() => alert("Help feature coming soon!")}>
             Help
           </button>
         </div>
@@ -73,4 +74,3 @@ function FlavorIcons() {
 }
 
 export default Home;
-

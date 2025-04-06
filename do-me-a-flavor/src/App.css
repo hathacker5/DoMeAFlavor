@@ -1,3 +1,4 @@
+/* home page */
 #title-1 {
   font-size: 200%;
 }
@@ -10,7 +11,6 @@
   text-align: center;
   color: white;
 
-  /* padding: 15%; */
   /* min-height requires display, flex-direction, align-itmes, and justify-content */
   min-height: 50vh;
   display: flex;
@@ -18,18 +18,33 @@
   align-items: center;
   justify-content: center;
 }
-.buttons-con-outer {
+.buttons-con {
   padding: 2%;
   text-align: center;
 }
 .buttons-con-inner {
-  padding: 2%;
+  padding: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttons-con-inner > * {
+  /* for when the buttons wrap to next row */
+  flex: 1 1 auto;
+  margin: 5px;
 }
 .flavor-icons-con {
   padding: 2%;
-
 }
-
+button.button-start {
+  padding: 5%;
+}
+.button-start-con {
+  padding: 5%;
+  margin: 10px;
+  text-align: center;
+}
 .flavor-icons-con {
   padding: 2%;
   text-align: center;
@@ -38,6 +53,89 @@
 .flavor-icon {
   padding: 2%;
 }
+
+/* headers and footers */
+.header {
+  background-color: #2BC1CC;
+  padding: 2%;
+  color: white;
+}
+.header-buttons-con {
+  display: flex;
+  justify-content: space-between; /* Distributes space between items */
+  align-items: center; /* Aligns items vertically in the center */
+}
+.nav-button {
+  gap:10px;
+  padding-left: 10px;;
+  padding-right: 10px;;
+}
+.header-recipe {
+  margin-left: auto; /* Pushes this item to the right */
+}
+.header-title {
+  padding: 10px;
+  text-align: center;
+}
+.footer-buttons-con {
+  display: flex;
+  justify-content: space-between; /* Distributes space between items */
+  align-items: center; /* Aligns items vertically in the center */
+
+  padding: 2%;
+  margin: 10px;
+}
+.footer-back {
+  margin-right: auto; /* Pushes this item to the left */
+
+}
+.footer-next {
+  margin-left: auto; /* Pushes this item to the right */
+
+  
+}
+
+/* ingredients */
+.ingreds-con {
+  padding: 2%;
+}
+.ingred-err {
+  margin-left: 10px;
+  color: #676767;
+}
+
+.ingreds-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+
+}
+/* .ingreds-item-name {
+  }
+.ingreds-item-btn {
+} */
+.search-input-con {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.search-results-con {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.add-rm-button {
+  background: none;
+  border: none;
+}
+.color-red {
+  color: red;
+}
+.color-green {
+  color: green;
+}
+
+/* flavor */
 
 /* flavor icon slider */
 
