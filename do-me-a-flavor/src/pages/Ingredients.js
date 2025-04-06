@@ -13,8 +13,9 @@ function Ingredients(props) {
   return (
     <div>
       <IngredientsHeader />
+
       <div className="container">
-          
+  
         <button onClick={() => (setUserIngredientList([...userIngredientList, "apple"]))}>Debug: Add apple</button>
         <button onClick={() => (setUserIngredientList([...userIngredientList, "butter"]))}>Debug: Add butter</button>
         <button onClick={() => (setUserIngredientList([...userIngredientList, "walnuts"]))}>Debug: Add walnuts</button>

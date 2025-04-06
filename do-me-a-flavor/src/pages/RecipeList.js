@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import { useLocation } from 'react-router-dom';
 import RecipePage from "./RecipePage";
 
 function RecipeList(props) {
@@ -17,28 +16,42 @@ function RecipeList(props) {
 
   const [recipePageButtonPopup, setRecipePageButtonPopup] = useState(false);
   
+  const [loading, setLoading] = useState(false);
+  const [loadingError, setLoadingError] = useState(false);
+
   return (
     <div>
-      {/* RecipeListHeader todo */}
-      <div className="container">
-        {/* buttons */}
-        <Link to="/Flavors">
-          <button>Back</button>
-        </Link> 
-        <Link to="/">
-          <button>Go Home</button>
-        </Link>
+      <RecipeListHeader />
 
-        {console.log("userFlavorPreference", userFlavorPreference)}
-        <button onClick={() => getRecipes(userIngredientList, setUserIngredientList, userFlavorPreference, setUserFlavorPreference, userRecipeList, setUserRecipeList)}>
-          Get Recipes
-        </button>
+      <div className="container">
+
+        {/* buttons */}
+        <div className="footer-buttons-con">
+          <div className="footer-back">
+            <Link to="/Flavors">
+              <button className="btn btn-primary">Back</button>
+            </Link> 
+          </div>
+          <div className="footer-next">
+            <Link to="/">
+              <button className="btn btn-primary">Go Home</button>
+            </Link>
+          </div>
+        </div>
+
+        {/* {console.log("userFlavorPreference", userFlavorPreference)} */}
+        <div className="get-recipes-button">
+          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, setUserRecipeList, setLoading, setLoadingError)} className="btn btn-primary">
+            Get Recipes
+          </button>
+        </div>
+
+        <Loading loading={loading} loadingError={loadingError} />
 
         {userRecipeList.map((recipe) => (
           <div>
-            <RecipeCard recipe={recipe}/>
+            <RecipeCard recipe={recipe} setRecipePageButtonPopup={setRecipePageButtonPopup} />
 
-            <button onClick={() => setRecipePageButtonPopup(true)}> Open Recipe for {recipe.title}. </button>
             <RecipePage trigger={recipePageButtonPopup} setTrigger={setRecipePageButtonPopup} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
               Recipe for {recipe.title}  
             </RecipePage>
@@ -48,7 +61,7 @@ function RecipeList(props) {
     </div>
   );
 }
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, setRecipePageButtonPopup }) => {
   return (
     <Col sm={12}>
       <Card
@@ -67,9 +80,16 @@ const RecipeCard = ({ recipe }) => {
             <b>{recipe.title}</b>
           </Card.Title>
           <Card.Text>
-            <img src={recipe.image} alt={recipe.title} />
-            <br/>
-            {parseInt(recipe.score)}% flavor match
+            <div className="card-contents">
+              <img src={recipe.image} alt={recipe.title} />
+              <br/>
+              <p className="popup-match">{parseInt(recipe.score)}% flavor match<br /></p>
+              <div className="popup-button">
+                <button onClick={() => setRecipePageButtonPopup(true)} className="btn btn-secondary"> 
+                  Open Recipe for {recipe.title}. 
+                </button>
+              </div>
+            </div>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -78,7 +98,11 @@ const RecipeCard = ({ recipe }) => {
 };
 
 // returns a sorted list of recipes based on flavor profile match
-const getRecipes = async (userIngredientList, setUserIngredientList, userFlavorPreference, setUserFlavorPreference, userRecipeList, setUserRecipeList) => {
+const getRecipes = async (userIngredientList, userFlavorPreference, setUserRecipeList, setLoading, setLoadingError) => {
+  console.log("getting recipes with userIngredientList=",userIngredientList, " and userIngredientList=",userIngredientList);
+  setLoading(true);
+  setLoadingError(false);
+
   const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${userIngredientList}&number=10&ignorePantry=true&ranking=1`;
   const options = {
     method: "GET",  
@@ -89,6 +113,8 @@ const getRecipes = async (userIngredientList, setUserIngredientList, userFlavorP
   };
 
   try {
+    console.log("in try block");
+    console.log("user flavor pref", userFlavorPreference); //, " userFlavorPreference.get(Bitter)"); //, userFlavorPreference.get("Bitter"));
     const response = await fetch(url, options);
     const result = await response.json();
 
@@ -126,7 +152,12 @@ const getRecipes = async (userIngredientList, setUserIngredientList, userFlavorP
     
     setUserRecipeList(sortedList);
   } catch (error) {
+    console.log("in error block");
     console.error(error);
+    setLoadingError(true);
+  } finally {
+    console.log("in finally block");
+    setLoading(false);
   }
 };
 
@@ -150,5 +181,50 @@ const getFlavorProfile = async (recipeID) => {
     return [];
   }
 };
+
+const RecipeListHeader = () => {
+  return (
+    <div className="header">
+      <div className="header-buttons-con">
+        <div className="nav-button">
+          <Link to="/Flavors">
+          <button className="btn btn-primary" >Back</button>
+          </Link>
+        </div>
+        <div className="nav-button">
+          <Link to="/">
+          <button className="btn btn-primary" >Home</button>
+          </Link>
+        </div>
+        <div className="header-recipe">
+          <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button>
+        </div>
+      </div>
+      <div className="header-title">
+        Find Recipes with Matching Flavors
+      </div>
+    </div>
+  );
+}
+
+function Loading ({ loading, loadingError }) {
+  if (loading) {
+    return (
+      <div>
+        <p>
+          Loading...
+        </p>
+      </div>
+    )
+  } else if (loadingError) {
+    return (
+      <div>
+        <p>
+          Error Getting Recipes (API call probably failed, check debug console)
+        </p>
+      </div>
+    )
+  }
+}
 
 export default RecipeList;
