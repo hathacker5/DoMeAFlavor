@@ -69,7 +69,7 @@ function RecipePageCard (props) {
             <ul>
                 {recipeIngred.map((item, index) => (
                     <li key={index}>
-                        <p>{item.name}</p>
+                        <p>{item.name} ( {item.amount.us.value} {item.amount.us.unit} )</p>
                     </li>
                 ))}
             </ul>
