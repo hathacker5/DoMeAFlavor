@@ -42,7 +42,7 @@ function RecipeList(props) {
 
         {/* {console.log("userFlavorPreference", userFlavorPreference)} */}
         <div className="get-recipes-button">
-          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, setUserRecipeList, setLoading, setLoadingError)} className="btn btn-primary">
+          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError)} className="btn btn-primary">
             Get Recipes
           </button>
         </div>
@@ -88,7 +88,7 @@ const RecipeCard = ({ recipe, setOpenRecipeId }) => {
               <br/>
               <p className="popup-match">{parseInt(recipe.score)}% flavor match<br /></p>
               <div className="popup-button">
-                <button onClick={() => setOpenRecipeId(recipe.id)} className="btn btn-secondary"> 
+                <button onClick={() => setOpenRecipeId(recipe.id)} className="btn btn-primary"> 
                   Open Recipe for {recipe.title}. 
                 </button>
               </div>
@@ -101,7 +101,7 @@ const RecipeCard = ({ recipe, setOpenRecipeId }) => {
 };
 
 // returns a sorted list of recipes based on flavor profile match
-const getRecipes = async (userIngredientList, userFlavorPreference, setUserRecipeList, setLoading, setLoadingError) => {
+const getRecipes = async (userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError) => {
   console.log("getting recipes with userIngredientList=",userIngredientList, " and userIngredientList=",userIngredientList);
   setLoading(true);
   setLoadingError(false);
@@ -160,6 +160,7 @@ const getRecipes = async (userIngredientList, userFlavorPreference, setUserRecip
     setLoadingError(true);
   } finally {
     console.log("in finally block");
+    console.log("got userRecipeList", userRecipeList)
     setLoading(false);
   }
 };

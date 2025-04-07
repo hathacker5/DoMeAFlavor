@@ -1,4 +1,5 @@
 import "../App.css";
+import "./RecipePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
@@ -15,15 +16,14 @@ function RecipePage(props){
   return props.openRecipeId == recipe.id ? (
     <Modal show={props.openRecipeId == recipe.id} onHide={() => props.setOpenRecipeId("")}>
       <Modal.Header closeButton>
-      <Modal.Title>Modal title</Modal.Title>
+      <Modal.Title>{recipe.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {props.children}
         <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} />
       </Modal.Body>
       <Modal.Footer>
-      <Button variant="secondary" onClick={() => props.setOpenRecipeId("")}>
-        Close Recipe.
+      <Button variant="primary" onClick={() => props.setOpenRecipeId("")}>
+        Close
       </Button>
       </Modal.Footer>
     </Modal>
@@ -43,22 +43,21 @@ function RecipePageCard (props) {
   const [newIngred, setNewIngred] = useState([]);
   const [recipeIngred, setRecipeIngred] = useState([]);
 
-
   return (
     <div>
-      <Link to="/">
-        <button>Go Home</button>
-      </Link>
-      
-      <button onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)}>Display Recipe.</button>
-      <h1>{recipe.title}</h1>
-      <img src= {recipe.image}></img>
+      <div className="recipe-image-con">
+        <img src= {recipe.image} className="recipe-image"></img>
 
-      <button onClick={() => setButtonPopup(true)}>Substitute Ingredients</button>
+        <button onClick={() => setButtonPopup(true)} className="btn btn-primary rp-button">Substitute Ingredients</button>
+
+        <button onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)} className="btn btn-primary rp-button">
+          Display Recipe
+        </button>
+      </div>
       
       <SubstitutionPopup trigger={buttonPopup} setTrigger={setButtonPopup} missingIngred={missingIngred} setMissingIngred = {setMissingIngred}
       newIngred={newIngred} setNewIngred={setNewIngred} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
-        <h3>My popup.</h3>
+        <h3>Ingredient Substitutions</h3>
       </SubstitutionPopup>
 
       {newIngred.map((step, index) => (

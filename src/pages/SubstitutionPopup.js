@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import "../App.css";
+import "./SubstitutionPopup.css";
+import React, { useState, useEffect } from 'react';
 
 
 function SubstitutionPopup(props) {
   return props.trigger ? (
     <div className="popup">
       <div className="popup-inner">
-        <button className="close-btn" onClick={() => props.setTrigger(false)}>
-          Close Popup.
+        <button className="close-btn btn btn-primary" onClick={() => props.setTrigger(false)}>
+          Close
         </button>
         {props.children}
         <SubstitutionMenu
@@ -79,6 +80,7 @@ const SubstitutionMenu = ({
 
                 setUserIngredientList((prev) => [...prev, `${alt}`]);
             }}
+            className="btn btn-secondary"
             >
             {alt}
             </button>
