@@ -14,7 +14,7 @@ function RecipeList(props) {
   const userRecipeList = props.userRecipeList;
   const setUserRecipeList = props.setUserRecipeList;
 
-  const [recipePageButtonPopup, setRecipePageButtonPopup] = useState(false);
+  const [openRecipeId, setOpenRecipeId] = useState("");
   
   const [loading, setLoading] = useState(false);
   const [loadingError, setLoadingError] = useState(false);
@@ -50,9 +50,9 @@ function RecipeList(props) {
 
         {userRecipeList.map((recipe) => (
           <div>
-            <RecipeCard recipe={recipe} setRecipePageButtonPopup={setRecipePageButtonPopup} />
+            <RecipeCard recipe={recipe} setOpenRecipeId={setOpenRecipeId} />
 
-            <RecipePage trigger={recipePageButtonPopup} setTrigger={setRecipePageButtonPopup} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
+            <RecipePage openRecipeId={openRecipeId} setOpenRecipeId={setOpenRecipeId} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
               Recipe for {recipe.title}  
             </RecipePage>
           </div>
@@ -61,7 +61,7 @@ function RecipeList(props) {
     </div>
   );
 }
-const RecipeCard = ({ recipe, setRecipePageButtonPopup }) => {
+const RecipeCard = ({ recipe, setOpenRecipeId }) => {
   return (
     <Col sm={12}>
       <Card
@@ -87,7 +87,7 @@ const RecipeCard = ({ recipe, setRecipePageButtonPopup }) => {
               <br/>
               <p className="popup-match">{parseInt(recipe.score)}% flavor match<br /></p>
               <div className="popup-button">
-                <button onClick={() => setRecipePageButtonPopup(true)} className="btn btn-secondary"> 
+                <button onClick={() => setOpenRecipeId(recipe.id)} className="btn btn-secondary"> 
                   Open Recipe for {recipe.title}. 
                 </button>
               </div>

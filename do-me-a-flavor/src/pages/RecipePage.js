@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SubstitutionPopup from "./SubstitutionPopup";
+import { Button, Modal } from "react-bootstrap";
 
 
 function RecipePage(props){
@@ -11,18 +12,21 @@ function RecipePage(props){
     const userIngredientList = props.userIngredientList;
     const setUserIngredientList = props.setUserIngredientList;
 
-    return props.trigger ? (
-        <div className="popup">
-            <div className="popup-inner">
-                <button className="close-btn" onClick={() => props.setTrigger(false)}>
-                    Close Recipe.
-                </button>
-
+    return props.openRecipeId == recipe.id ? (
+        <Modal show={props.openRecipeId == recipe.id} onHide={() => props.setOpenRecipeId("")}>
+            <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
                 {props.children}
-
                 <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} />
-            </div>
-        </div>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={() => props.setOpenRecipeId("")}>
+                Close Recipe.
+            </Button>
+            </Modal.Footer>
+        </Modal>
     ) : (
         ""
     );
