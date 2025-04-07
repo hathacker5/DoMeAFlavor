@@ -1,8 +1,11 @@
 import "../App.css";
+import "./Ingredients.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { BsPlusCircle, BsDashCircle } from "react-icons/bs";
 import { useState } from "react";
+import React from 'react';
+import { Button, Modal } from 'react-bootstrap';
 
 function Ingredients(props) {
   const userIngredientList = props.userIngredientList;
@@ -12,13 +15,14 @@ function Ingredients(props) {
 
   return (
     <div>
-      <IngredientsHeader />
+      <IngredientsHeader list={userIngredientList} />
 
       <div className="container">
   
         <button onClick={() => (setUserIngredientList([...userIngredientList, "apple"]))}>Debug: Add apple</button>
         <button onClick={() => (setUserIngredientList([...userIngredientList, "butter"]))}>Debug: Add butter</button>
         <button onClick={() => (setUserIngredientList([...userIngredientList, "walnuts"]))}>Debug: Add walnuts</button>
+
 
 
         <div className = "ingreds-con">
@@ -194,7 +198,13 @@ const updateIngredientList = ( name, ingredientList, setIngredientList ) => {
   }
 };
 
-const IngredientsHeader = () => {
+const IngredientsHeader = ( list ) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+
   return (
     <div className="header">
       <div className="header-buttons-con">
@@ -209,7 +219,26 @@ const IngredientsHeader = () => {
           </Link>
         </div>
         <div className="header-recipe">
-          <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button>
+          <Button variant="primary" onClick={handleShow}>
+          ≡
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>My Current Recipe</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>My Ingredients: </p>
+              <HeaderIngredients list={list.list} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button> */}
         </div>
       </div>
       <div className="header-title">
@@ -217,6 +246,24 @@ const IngredientsHeader = () => {
       </div>
     </div>
   );
+}
+
+function HeaderIngredients ({ list }) {
+  if (list.length > 0) {
+    return (
+      <div className="header-ingreds-list">
+        {list.map((item, index) => (
+          <p>{item}</p>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+    <p className="ingred-err">
+      No ingredients added.
+    </p> 
+    );
+  }
 }
 
 // Checks that the list isn't empty

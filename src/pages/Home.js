@@ -1,6 +1,7 @@
 import '../App.css';
+import './Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (

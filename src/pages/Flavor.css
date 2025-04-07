@@ -1,0 +1,114 @@
+/* flavor.css */
+/* flavor icon slider */
+
+.flavors-con {
+  padding: 2%;
+}
+.flavor-icon {
+  padding: 2%;
+}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+  /* background-color: #ffffffff; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.slidecontainer-percent {
+  padding-left: 10px;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: transparent;
+  background-color: #ffffffff;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 23px;
+  height: 25px;
+  border: 0;
+  background: transparent;
+  background-color: #ffffffff;
+  cursor: pointer;
+}
+
+.icon_bitter::-webkit-slider-thumb {
+  background: url('../../public/images/icon_bitter.svg');
+}
+
+.icon_bitter::-moz-range-thumb {
+  background: url('../../public/images/icon_bitter.svg');
+}
+
+.icon_rich::-webkit-slider-thumb {
+  background: url('../../public/images/icon_rich.svg');
+}
+
+.icon_rich::-moz-range-thumb {
+  background: url('../../public/images/icon_rich.svg');
+}
+
+.icon_salty::-webkit-slider-thumb {
+  background: url('../../public/images/icon_salty.svg');
+}
+
+.icon_salty::-moz-range-thumb {
+  background: url('../../public/images/icon_salty.svg');
+}
+
+.icon_sour::-webkit-slider-thumb {
+  background: url('../../public/images/icon_sour.svg');
+}
+
+.icon_sour::-moz-range-thumb {
+  background: url('../../public/images/icon_sour.svg');
+}
+
+.icon_spicy::-webkit-slider-thumb {
+  background: url('../../public/images/icon_spicy.svg');
+}
+
+.icon_spicy::-moz-range-thumb {
+  background: url('../../public/images/icon_spicy.svg');
+}
+
+.icon_sweet::-webkit-slider-thumb {
+  background: url('../../public/images/icon_sweet.svg');
+}
+
+.icon_sweet::-moz-range-thumb {
+  background: url('../../public/images/icon_sweet.svg');
+}
+
+.icon_umami::-webkit-slider-thumb {
+  background: url('../../public/images/icon_umami.svg');
+}
+
+.icon_umami::-moz-range-thumb {
+  background: url('../../public/images/icon_umami.svg');
+}

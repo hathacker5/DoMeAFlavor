@@ -1,0 +1,63 @@
+/* home.css home page */
+#title-1 {
+  font-size: 200%;
+}
+#title-2 {
+  padding: 5%;
+  font-size: 300%;
+}
+
+.card {
+  width: 100%;
+  word-wrap: break-word;
+  padding-left: 0px;
+}
+
+
+.title-con {
+  background-color: #2BC1CC;
+  text-align: center;
+  color: white;
+
+  /* min-height requires display, flex-direction, align-itmes, and justify-content */
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.buttons-con {
+  padding: 2%;
+  text-align: center;
+}
+.buttons-con-inner {
+  padding: 3%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttons-con-inner > * {
+  /* for when the buttons wrap to next row */
+  flex: 1 1 auto;
+  margin: 5px;
+}
+.flavor-icons-con {
+  padding: 2%;
+}
+button.button-start {
+  padding: 5%;
+}
+.button-start-con {
+  padding: 5%;
+  margin: 10px;
+  text-align: center;
+}
+.flavor-icons-con {
+  padding: 2%;
+  text-align: center;
+  margin: 15%;
+}
+.flavor-icon {
+  padding: 2%;
+}

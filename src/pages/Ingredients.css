@@ -1,0 +1,40 @@
+/* ingredients.css */
+.ingreds-con {
+  padding: 2%;
+}
+.ingred-err {
+  margin-left: 10px;
+  color: #676767;
+}
+.ingreds-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+/* .ingreds-item-name {
+  }
+.ingreds-item-btn {
+} */
+.search-input-con {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.search-results-con {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.add-rm-button {
+  background: none;
+  border: none;
+}
+.color-red {
+  color: red;
+}
+.color-green {
+  color: green;
+}
+.header-ingreds-list {
+  padding-left: 10px;
+}

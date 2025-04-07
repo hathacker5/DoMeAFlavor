@@ -1,4 +1,5 @@
 import "../App.css";
+import "./RecipeList.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -78,7 +79,7 @@ const RecipeCard = ({ recipe, setOpenRecipeId }) => {
         }}
       >
         <Card.Body>
-          <Card.Title style={{ fontSize: "32px", color: "#6cb1c9" }}>
+          <Card.Title className="card-title">
             <b>{recipe.title}</b>
           </Card.Title>
           <Card.Text>

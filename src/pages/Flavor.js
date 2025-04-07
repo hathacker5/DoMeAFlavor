@@ -1,4 +1,5 @@
 import "../App.css";
+import "./Flavor.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
@@ -49,7 +50,7 @@ const SingleFlavor = ( {name, preference, userFlavorPreference, setUserFlavorPre
     <div>
       <div className="row">
         <div className="col-3">
-          <img src={`./images/icon_${name}.svg`} alt={`${name} icon`} className="flavor-icon" />
+          <img src={`../../public/images/icon_${name}.svg`} alt={`${name} icon`} className="flavor-icon" />
         </div>
         <div className="col-9">
           <h2>{name}</h2>
