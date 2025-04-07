@@ -64,27 +64,15 @@ function RecipeList(props) {
 }
 const RecipeCard = ({ recipe, setOpenRecipeId }) => {
   return (
-    <Col sm={12}>
-      <Card
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          margin: "15px",
-          marginBottom: "10px",
-          borderRadius: "25px",
-          borderWidth: "4px",
-          paddingLeft: "0px",
-          marginLeft: "0px",
-        }}
-      >
-        <Card.Body>
+    <Col sm={12} className="mycard-outer">
+      <Card className="mycard">
+        <Card.Body className="mycard-body">
           <Card.Title className="card-title">
             <b>{recipe.title}</b>
           </Card.Title>
           <Card.Text>
             <div className="card-contents">
-              <img src={recipe.image} alt={recipe.title} />
+              <img src={recipe.image} alt={recipe.title} className="card-img" />
               <br/>
               <p className="popup-match">{parseInt(recipe.score)}% flavor match<br /></p>
               <div className="popup-button">
