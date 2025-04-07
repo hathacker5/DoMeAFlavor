@@ -22,6 +22,8 @@ function RecipeList(props) {
   const [loading, setLoading] = useState(false);
   const [loadingError, setLoadingError] = useState(false);
 
+  const [numRecipesExcluded, setNumRecipesExcluded] = useState(0);
+
   return (
     <div>
       <RecipeListHeader />
@@ -44,12 +46,14 @@ function RecipeList(props) {
 
         {/* {console.log("userFlavorPreference", userFlavorPreference)} */}
         <div className="get-recipes-button">
-          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError)} className="btn btn-primary">
+          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError, userExclusionList, setNumRecipesExcluded)} className="btn btn-primary">
             Get Recipes
           </button>
         </div>
 
         <Loading loading={loading} loadingError={loadingError} />
+
+        {userRecipeList.length > 0 ? (<p>{numRecipesExcluded} recipes are excluded from your search.</p>) : ""}
 
         {userRecipeList.map((recipe) => (
           <div>
@@ -64,6 +68,7 @@ function RecipeList(props) {
     </div>
   );
 }
+
 const RecipeCard = ({ recipe, setOpenRecipeId }) => {
   return (
     <Col sm={12} className="mycard-outer">
@@ -91,7 +96,7 @@ const RecipeCard = ({ recipe, setOpenRecipeId }) => {
 };
 
 // returns a sorted list of recipes based on flavor profile match
-const getRecipes = async (userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError) => {
+const getRecipes = async (userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError, userExclusionList, setNumRecipesExcluded) => {
   console.log("getting recipes with userIngredientList=",userIngredientList, " and userIngredientList=",userIngredientList);
   setLoading(true);
   setLoadingError(false);
@@ -142,8 +147,11 @@ const getRecipes = async (userIngredientList, userFlavorPreference, userRecipeLi
 
     // sort list
     const sortedList = [...recipeList].sort((a, b) => b.score - a.score);
-    
-    setUserRecipeList(sortedList);
+
+    const filteredList = sortedList.filter(recipe => !recipeHasExclusion(recipe, userExclusionList));
+    setNumRecipesExcluded(sortedList.length - filteredList.length);
+
+    setUserRecipeList(filteredList);
   } catch (error) {
     console.log("in error block");
     console.error(error);
@@ -154,6 +162,22 @@ const getRecipes = async (userIngredientList, userFlavorPreference, userRecipeLi
     setLoading(false);
   }
 };
+
+function recipeHasExclusion(recipe, userExclusionList) {
+  const allIngredients = [
+    ...recipe.usedIngredients,
+    ...recipe.missedIngredients,
+    ...recipe.unusedIngredients,
+  ];
+
+  for (const ingredient of allIngredients) {
+    if (userExclusionList.includes(ingredient.name.toLowerCase())) {
+      return true;
+    }
+  }
+
+  return false;
+}
 
 // fetches the flavor profile of an individual
 const getFlavorProfile = async (recipeID) => {
