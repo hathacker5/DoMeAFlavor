@@ -61,7 +61,7 @@ function RecipePageCard (props) {
       </div>
       
       <SubstitutionPopup trigger={buttonPopup} setTrigger={setButtonPopup} missingIngred={missingIngred} setMissingIngred = {setMissingIngred}
-      newIngred={newIngred} setNewIngred={setNewIngred} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
+      newIngred={newIngred} setNewIngred={setNewIngred} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList}>
         <h3>Ingredient Substitutions</h3>
       </SubstitutionPopup>
 
@@ -72,14 +72,14 @@ function RecipePageCard (props) {
           </div>
         ))}
 
-        <h2>Current exclsions:</h2>
-            {console.log("exclusion list", userExclusionList)}
-            {userExclusionList.map((ingred, index) => (
-                <div>
-                    <p>Exclusion {index}</p>
-                    <p>Exclude {ingred}.</p>
-                </div>
-            ))}
+      <h2>Current exclsions:</h2>
+      {console.log("exclusion list", userExclusionList)}
+      {userExclusionList.map((ingred, index) => (
+          <div key={index}>
+              <p>Exclusion {index}</p>
+              <p>Exclude {ingred}.</p>
+          </div>
+      ))}
 
       
       <h1>Ingredients</h1>

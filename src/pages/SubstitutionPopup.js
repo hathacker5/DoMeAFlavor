@@ -19,7 +19,7 @@ function SubstitutionPopup(props) {
           userIngerdientList={props.userIngerdientList}
           setUserIngredientList={props.setUserIngredientList}
           userExclusionList={props.userExclusionList}
-          setUserExclusionList={props.setUserIngredientList}
+          setUserExclusionList={props.setUserExclusionList}
         />
       </div>
     </div>
@@ -93,10 +93,9 @@ const SubstitutionMenu = ({
         <button onClick={() => {
           setUserExclusionList((prev) => [...prev, `${missing}`]);
           setMissingIngred((prev) => prev.slice(1));
-          console.log("missing ingredient to add", missing);
-          
-          console.log("user exclusion list after ading", userExclusionList);
-        }}>
+        }}
+          className="btn btn-secondary"
+          >
           Exclude ingredient.
         </button>
         </div>)
