@@ -11,6 +11,8 @@ import { useState } from "react";
 
 function App() {
   const [userIngredientList, setUserIngredientList] = useState([]);
+  const [userExclusionList, setUserExclusionList] = useState([]);
+
   const initialFlavors = new Map([
     ["Spicy", 0],
     ["Sweet", 0],
@@ -46,7 +48,6 @@ function App() {
             <Flavor
               userFlavorPreference={userFlavorPreference}
               setUserFlavorPreference={setUserFlavorPreference}
-              userIngredientList={userIngredientList}
             />
           }
         />
@@ -57,6 +58,8 @@ function App() {
             <RecipeList
               userIngredientList={userIngredientList}
               setUserIngredientList={setUserIngredientList}
+              userExclusionList={userExclusionList}
+              setUserExclusionList={setUserExclusionList}
               userFlavorPreference={userFlavorPreference}
               setUserFlavorPreference={setUserFlavorPreference}
               userRecipeList={userRecipeList}

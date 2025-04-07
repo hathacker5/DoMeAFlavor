@@ -12,6 +12,8 @@ function RecipePage(props){
   const recipe = props.recipe;
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
+  const userExclusionList = props.userExclusionList;
+  const setUserExclusionList = props.setUserExclusionList;
 
   return props.openRecipeId == recipe.id ? (
     <Modal show={props.openRecipeId == recipe.id} onHide={() => props.setOpenRecipeId("")}>
@@ -19,7 +21,8 @@ function RecipePage(props){
       <Modal.Title>{recipe.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} />
+        {props.children}
+        <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList}/>
       </Modal.Body>
       <Modal.Footer>
       <Button variant="primary" onClick={() => props.setOpenRecipeId("")}>
@@ -36,6 +39,8 @@ function RecipePageCard (props) {
   const recipe = props.recipe;
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
+  const userExclusionList = props.userExclusionList;
+  const setUserExclusionList = props.setUserExclusionList;
 
   const [instructionList, setInstructionList] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
@@ -66,6 +71,15 @@ function RecipePageCard (props) {
           <p>{step}</p>
           </div>
         ))}
+
+        <h2>Current exclsions:</h2>
+            {console.log("exclusion list", userExclusionList)}
+            {userExclusionList.map((ingred, index) => (
+                <div>
+                    <p>Exclusion {index}</p>
+                    <p>Exclude {ingred}.</p>
+                </div>
+            ))}
 
       
       <h1>Ingredients</h1>

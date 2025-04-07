@@ -10,6 +10,8 @@ import RecipePage from "./RecipePage";
 function RecipeList(props) {
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
+  const userExclusionList = props.userExclusionList;
+  const setUserExclusionList = props.setUserExclusionList;
   const userFlavorPreference = props.userFlavorPreference;
   const setUserFlavorPreference = props.setUserFlavorPreference;
   const userRecipeList = props.userRecipeList;
@@ -53,7 +55,7 @@ function RecipeList(props) {
           <div>
             <RecipeCard recipe={recipe} setOpenRecipeId={setOpenRecipeId} />
 
-            <RecipePage openRecipeId={openRecipeId} setOpenRecipeId={setOpenRecipeId} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList}>
+            <RecipePage openRecipeId={openRecipeId} setOpenRecipeId={setOpenRecipeId} recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList}>
               Recipe for {recipe.title}  
             </RecipePage>
           </div>
@@ -65,9 +67,9 @@ function RecipeList(props) {
 const RecipeCard = ({ recipe, setOpenRecipeId }) => {
   return (
     <Col sm={12} className="mycard-outer">
-      <Card className="mycard">
-        <Card.Body className="mycard-body">
-          <Card.Title className="card-title">
+    <Card className="mycard">
+      <Card.Body className="mycard-body">
+        <Card.Title className="card-title">
             <b>{recipe.title}</b>
           </Card.Title>
           <Card.Text>
