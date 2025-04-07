@@ -203,7 +203,6 @@ const IngredientsHeader = ( list ) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
 
   return (
     <div className="header">
@@ -218,9 +217,11 @@ const IngredientsHeader = ( list ) => {
           <button className="btn btn-primary" >Home</button>
           </Link>
         </div>
+
+        {/* My Recipe (current user selections) */}
         <div className="header-recipe">
           <Button variant="primary" onClick={handleShow}>
-          ≡
+            ≡
           </Button>
 
           <Modal show={show} onHide={handleClose}>
@@ -251,7 +252,7 @@ const IngredientsHeader = ( list ) => {
 function HeaderIngredients ({ list }) {
   if (list.length > 0) {
     return (
-      <div className="header-ingreds-list">
+      <div className="myrecipe-list">
         {list.map((item, index) => (
           <p>{item}</p>
         ))}
@@ -259,7 +260,7 @@ function HeaderIngredients ({ list }) {
     );
   } else {
     return (
-    <p className="ingred-err">
+    <p className="myrecipe-err">
       No ingredients added.
     </p> 
     );

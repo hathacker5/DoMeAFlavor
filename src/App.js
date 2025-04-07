@@ -46,6 +46,7 @@ function App() {
             <Flavor
               userFlavorPreference={userFlavorPreference}
               setUserFlavorPreference={setUserFlavorPreference}
+              userIngredientList={userIngredientList}
             />
           }
         />

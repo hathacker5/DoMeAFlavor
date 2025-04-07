@@ -2,10 +2,6 @@
 .ingreds-con {
   padding: 2%;
 }
-.ingred-err {
-  margin-left: 10px;
-  color: #676767;
-}
 .ingreds-item {
   display: flex;
   justify-content: space-between;
@@ -34,7 +30,4 @@
 }
 .color-green {
   color: green;
-}
-.header-ingreds-list {
-  padding-left: 10px;
 }

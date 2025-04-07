@@ -2,7 +2,9 @@ import "../App.css";
 import "./Flavor.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import Form from 'react-bootstrap/Form';
+import { Button, Modal } from 'react-bootstrap';
 
 function Flavor(props) {
   const userFlavorPreference = props.userFlavorPreference;
@@ -11,7 +13,7 @@ function Flavor(props) {
   
   return (
     <div>
-      <FlavorHeader />
+      <FlavorHeader list={props} />
 
       <div className="container">
 
@@ -87,7 +89,15 @@ function Slider({name, preference, userFlavorPreference, setUserFlavorPreference
   );
 }
 
-const FlavorHeader = () => {
+const FlavorHeader = ( list, flavors ) => {
+  console.log("list is", list);
+  console.log("list.list.userFlavorPreference is", list.list.userFlavorPreference);
+  console.log("list.list.userIngrednient is", list.list.userIngredientList);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   return (
     <div className="header">
       <div className="header-buttons-con">
@@ -101,8 +111,31 @@ const FlavorHeader = () => {
           <button className="btn btn-primary" >Home</button>
           </Link>
         </div>
+
+        {/* My Recipe (current user selections) */}
         <div className="header-recipe">
-          <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button>
+          <Button variant="primary" onClick={handleShow}>
+            ≡
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>My Current Recipe</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>My Ingredients: </p>
+              <HeaderIngredients list={list.list.userIngredientList} />
+              <p>My Flavors: </p>
+              <HeaderFlavors flavors={list.list.userFlavorPreference} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          {/* <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button> */}
         </div>
       </div>
       <div className="header-title">
@@ -112,12 +145,63 @@ const FlavorHeader = () => {
   );
 }
 
+function HeaderIngredients ({ list }) {
+  console.log("list in headeringredients", list);
+  if (list.length > 0) {
+    return (
+      <div className="myrecipe-list">
+        {list.map((item, index) => (
+          <p>{item}</p>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+    <p className="myrecipe-err">
+      No ingredients added.
+    </p> 
+    );
+  }
+}
+
+function HeaderFlavors ({ flavors }) {
+  console.log("headerflavors:", flavors);
+
+  return (
+    <div className="myrecipe-list">
+      {Array.from(flavors.entries()).map(([key, value]) => (
+        <p key={key}>
+          {key}: {value}%
+        </p>
+      ))}
+    </div>
+  );
+  // console.log(flavors.flavors);
+  // let vals = Array.from(flavors.values());
+  // let nonZeroVals = vals.filter(value => (value !== 0 && value !== '0'));
+  // if (nonZeroVals.length > 0) {
+  //   return (
+  //     <div className="myrecipe-list">
+  //       {nonZeroVals.map((item, index) => (
+  //         <p>{item}</p>
+  //       ))}
+  //     </div>
+  //   );
+  // } else {
+  //   return (
+  //   <p className="myrecipe-err">
+  //     No Flavors added.
+  //   </p> 
+  //   );
+  // }
+}
+
 // Checks that the list isn't too small
 function handleFlavorsNext (e, userIngredientList) {
   // there are less than two non-zero values
   let vals = Array.from(userIngredientList.values());
-  let numZeros = vals.filter(value => (value !== 0 && value !== '0'));
-  let isTooSmall = (numZeros.length < 2);
+  let nonZeroVals = vals.filter(value => (value !== 0 && value !== '0'));
+  let isTooSmall = (nonZeroVals.length < 2);
   // console.log("vals", vals, "numz", numZeros, "ist", isTooSmall);
   if (isTooSmall) {
     e.preventDefault(); // Prevent the default link behavior (don't move)

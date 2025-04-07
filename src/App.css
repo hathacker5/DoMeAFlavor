@@ -39,3 +39,15 @@
   margin-left: auto; /* Pushes this item to the right */
 }
 
+
+/* myrecipe*/
+
+
+.myrecipe-list {
+  padding-left: 10px;
+}
+
+.myrecipe-err {
+  margin-left: 10px;
+  color: #676767;
+}
