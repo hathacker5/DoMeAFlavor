@@ -3,11 +3,11 @@ import './Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home(props) {
   return (
     <div>
       <Title />
-      <Buttons />
+      <Buttons tutorialMode={props.tutorialMode} setTutorialMode={props.setTutorialMode} />
       <FlavorIcons />
     </div>
   );
@@ -23,13 +23,19 @@ function Title() {
   )
 }
 
-function Buttons() {
+function Buttons(props) {
   return (
     <div className="buttons-con-outer">
       <div className="button-start-con">
         <Link to="/Ingredients">
           <button className="btn btn-primary button-start" >Let Me Cook!</button>
         </Link>
+        <div>
+          <label>
+            <input type="checkbox" checked={props.tutorialMode} onChange={() => props.setTutorialMode(!props.tutorialMode)}/>
+            Tutorial Mode!
+          </label>
+        </div>
       </div>
 
       <div className=" buttons-con-inner">
@@ -49,6 +55,8 @@ function Buttons() {
           </button>
         </div>
       </div>
+
+    
 
     </div>
   )

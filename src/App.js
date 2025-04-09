@@ -27,10 +27,12 @@ function App() {
 
   const [userRecipeList, setUserRecipeList] = useState([]);
 
+  const [tutorialMode, setTutorialMode] = useState(false);
+
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home tutorialMode={tutorialMode} setTutorialMode={setTutorialMode}/>} />
 
         <Route
           path="Ingredients"
@@ -64,6 +66,7 @@ function App() {
               setUserFlavorPreference={setUserFlavorPreference}
               userRecipeList={userRecipeList}
               setUserRecipeList={setUserRecipeList}
+              tutorialMode={tutorialMode}
             />
           }
         />

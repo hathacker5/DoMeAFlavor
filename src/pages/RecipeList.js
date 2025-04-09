@@ -18,6 +18,7 @@ function RecipeList(props) {
   const setUserFlavorPreference = props.setUserFlavorPreference;
   const userRecipeList = props.userRecipeList;
   const setUserRecipeList = props.setUserRecipeList;
+  const tutorialMode = props.tutorialMode;
 
   const [openRecipeId, setOpenRecipeId] = useState("");
   
@@ -52,6 +53,12 @@ function RecipeList(props) {
             Get Recipes
           </button>
         </div>
+
+        {tutorialMode ? (<p>
+          Click "Get Recipes" to load or update your recipes.
+          Click the menu icon on the top right to see your ingredients and flavors.
+        </p>) : ""}
+        
 
         <Loading loading={loading} loadingError={loadingError} />
 
