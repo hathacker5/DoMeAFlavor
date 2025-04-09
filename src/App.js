@@ -48,6 +48,8 @@ function App() {
           path="Flavors"
           element={
             <Flavor
+              userIngredientList={userIngredientList}
+              setUserExclusionList={setUserIngredientList}
               userFlavorPreference={userFlavorPreference}
               setUserFlavorPreference={setUserFlavorPreference}
             />

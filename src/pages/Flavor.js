@@ -9,11 +9,10 @@ import { Button, Modal } from 'react-bootstrap';
 function Flavor(props) {
   const userFlavorPreference = props.userFlavorPreference;
   const setUserFlavorPreference = props.setUserFlavorPreference;
-  console.log(userFlavorPreference);
   
   return (
     <div>
-      <FlavorHeader list={props} />
+      <FlavorHeader userIngredientList={props.userIngredientList} userFlavorPreference={userFlavorPreference} />
 
       <div className="container">
         <button onClick={() => randomizeFlavors(setUserFlavorPreference)} className="btn btn-primary"> Surprise me</button>
@@ -108,10 +107,10 @@ function Slider({name, preference, userFlavorPreference, setUserFlavorPreference
   );
 }
 
-const FlavorHeader = ( list, flavors ) => {
-  console.log("list is", list);
-  console.log("list.list.userFlavorPreference is", list.list.userFlavorPreference);
-  console.log("list.list.userIngrednient is", list.list.userIngredientList);
+const FlavorHeader = ( {userIngredientList, userFlavorPreference} ) => {
+
+  console.log("list.list.userFlavorPreference is", userFlavorPreference);
+  console.log("list.list.userIngrednient is", userIngredientList);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -143,9 +142,9 @@ const FlavorHeader = ( list, flavors ) => {
             </Modal.Header>
             <Modal.Body>
               <p>My Ingredients: </p>
-              <HeaderIngredients list={list.list.userIngredientList} />
+              <HeaderIngredients list={userIngredientList} />
               <p>My Flavors: </p>
-              <HeaderFlavors flavors={list.list.userFlavorPreference} />
+              <HeaderFlavors flavors={userFlavorPreference} />
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
