@@ -14,12 +14,12 @@ function SubstitutionPopup(props) {
         <SubstitutionMenu
           missingIngred={props.missingIngred}
           setMissingIngred={props.setMissingIngred}
-          newIngred={props.newIngred}
-          setNewIngred={props.setNewIngred}
           userIngerdientList={props.userIngerdientList}
           setUserIngredientList={props.setUserIngredientList}
           userExclusionList={props.userExclusionList}
           setUserExclusionList={props.setUserExclusionList}
+          recipeIngred={props.recipeIngred}
+          setRecipeIngred={props.setRecipeIngred}
         />
       </div>
     </div>
@@ -31,22 +31,25 @@ function SubstitutionPopup(props) {
 const SubstitutionMenu = ({
   missingIngred,
   setMissingIngred,
-  newIngred,
-  setNewIngred,
   userIngerdientList,
   setUserIngredientList,
   userExclusionList,
-  setUserExclusionList
+  setUserExclusionList,
+  recipeIngred,
+  setRecipeIngred
 }) => {
   
   const [loadingAlternatives, setLoadingAlternatives] = useState(true);
   const [alternatives, setAlternatives] = useState([]);
   console.log("missing ingredients 2", missingIngred);
+  // const missing = missingIngred.length == 0 ? null : missingIngred[0];
+  const missingAmount = missingIngred.length == 0 ? null : missingIngred[0].amount;
+  const missingAmountUnit = missingIngred.length == 0 ? null : missingIngred[0].unit;
   const missing = missingIngred.length == 0 ? null : missingIngred[0].name;
 
   
   useEffect(() => {
-    if (missing) {
+    if (missing != null) {
         getAlternatives(missing, setLoadingAlternatives)
             .then((alts) => setAlternatives(alts))
             .finally(setLoadingAlternatives(false));
@@ -54,7 +57,7 @@ const SubstitutionMenu = ({
   }, [missing]);
 
   console.log("alt ingredients: ", alternatives);
-  if (!missing) {
+  if (missing == null) {
     return <p>No substitutions needed.</p>
   }
 
@@ -78,9 +81,18 @@ const SubstitutionMenu = ({
             key={index}
             onClick={() => {
                 setMissingIngred((prev) => prev.slice(1));
-                console.log("missing after button click", missingIngred);
-                setNewIngred((prev) => [...prev, `Substitute ${missing} with ${alt}`]);
-                console.log("new after button click");
+                console.log("missing", missing);
+                if (alt != missing) {
+                  const currIngred = recipeIngred.find((ingred) => ingred.name == missing);
+                  currIngred.name = `${missing} (Substitute ${alt})`;
+                }
+                
+                // console.log("missing after button click", missingIngred);
+                // console.log(`message: ${missing} (Substitute ${missingFull} with ${alt})`)
+                console.log("Recipe ingred after update: ", recipeIngred)
+                // setRecipeIngred((prev) => [...prev, {name: `${missing} (Substitute ${missingFull} with ${alt})`, amount: missingAmount, image: null}]);
+                // // [...prev, `${missing} (Substitute ${missingFull} with ${alt})`]
+                // console.log("new after button click");
 
                 setUserIngredientList((prev) => [...prev, `${alt}`]);
             }}
@@ -123,7 +135,8 @@ const getAlternatives = async (name, setLoadingAlternatives) => {
 
     // result.substitutes = extractIngredientNames(result.substitutes);
     setLoadingAlternatives(false);
-    return extractIngredientNames(result.substitutes);
+    // return extractIngredientNames(result.substitutes);
+    return result.substitutes
   } catch (error) {
     console.error(error);
     setLoadingAlternatives(false);
@@ -131,13 +144,19 @@ const getAlternatives = async (name, setLoadingAlternatives) => {
   }
 };
 
-const extractIngredientNames = (substitutes) => {
-  return substitutes.map((sub) => {
-    // Remove measurements (e.g., "1 cup =", "1/2 tsp", "7/8 cup", etc.)
-    return sub
-      .replace(/(\d+\/\d+|\d+)\s*(cup|tsp|tbsp|oz|g|ml|lb|kg)?\s*=?\s*/gi, "")
-      .trim();
-  });
-};
+function extractIngredientName(name) {
+  return name
+  .replace(/(\d+\/\d+|\d+)\s*(cup|tsp|tbsp|oz|g|ml|lb|kg)?\s*=?\s*/gi, "")
+  .trim();
+}
+
+// const extractIngredientNames = (substitutes) => {
+//   return substitutes.map((sub) => {
+//     // Remove measurements (e.g., "1 cup =", "1/2 tsp", "7/8 cup", etc.)
+//     return sub
+//       .replace(/(\d+\/\d+|\d+)\s*(cup|tsp|tbsp|oz|g|ml|lb|kg)?\s*=?\s*/gi, "")
+//       .trim();
+//   });
+// };
 
 export default SubstitutionPopup;

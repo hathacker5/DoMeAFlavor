@@ -9,9 +9,12 @@ import { Button, Modal } from "react-bootstrap";
 
 
 function RecipePage(props){
+  // recipe 
   const recipe = props.recipe;
+  // user specified 
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
+  // user exclusions 
   const userExclusionList = props.userExclusionList;
   const setUserExclusionList = props.setUserExclusionList;
 
@@ -37,15 +40,20 @@ function RecipePage(props){
 
 function RecipePageCard (props) {
   const recipe = props.recipe;
+  // user specified
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
+  // user exxclu
   const userExclusionList = props.userExclusionList;
   const setUserExclusionList = props.setUserExclusionList;
 
   const [instructionList, setInstructionList] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
+  // ingredients the user doesn't have 
   const [missingIngred, setMissingIngred] = useState(recipe.missedIngredients);
-  const [newIngred, setNewIngred] = useState([]);
+  // substitutions
+  //const [newIngred, setNewIngred] = useState([]);
+  // ingredients + amounts specified in the recipe
   const [recipeIngred, setRecipeIngred] = useState([]);
 
   return (
@@ -53,24 +61,27 @@ function RecipePageCard (props) {
       <div className="recipe-image-con">
         <img src= {recipe.image} className="recipe-image"></img>
 
-        <button onClick={() => setButtonPopup(true)} className="btn btn-primary rp-button">Substitute Ingredients</button>
 
         <button onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)} className="btn btn-primary rp-button">
           Display Recipe
         </button>
+
+        {recipeIngred.length == 0 ? " " : (<button onClick={() => setButtonPopup(true)} className="btn btn-primary rp-button">Substitute Ingredients</button>)}
       </div>
       
+      {/*  newIngred={newIngred} setNewIngred={setNewIngred} */}
+      
       <SubstitutionPopup trigger={buttonPopup} setTrigger={setButtonPopup} missingIngred={missingIngred} setMissingIngred = {setMissingIngred}
-      newIngred={newIngred} setNewIngred={setNewIngred} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList}>
+       userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList} recipeIngred={recipeIngred} setRecipeIngred={setRecipeIngred}>
         <h3>Ingredient Substitutions</h3>
       </SubstitutionPopup>
 
-      {newIngred.map((step, index) => (
+      {/* {newIngred.map((step, index) => (
           <div>
           <h2>Substitution {step.index}</h2>
           <p>{step}</p>
           </div>
-        ))}
+        ))} */}
 
       <h2>Current exclusions:</h2>
       {console.log("exclusion list", userExclusionList)}
