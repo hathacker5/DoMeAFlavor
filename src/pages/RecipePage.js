@@ -72,7 +72,7 @@ function RecipePageCard (props) {
           </div>
         ))}
 
-      <h2>Current exclsions:</h2>
+      <h2>Current exclusions:</h2>
       {console.log("exclusion list", userExclusionList)}
       {userExclusionList.map((ingred, index) => (
           <div key={index}>

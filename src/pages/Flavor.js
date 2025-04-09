@@ -16,6 +16,7 @@ function Flavor(props) {
       <FlavorHeader list={props} />
 
       <div className="container">
+        <button onClick={() => randomizeFlavors(setUserFlavorPreference)} className="btn btn-primary"> Surprise me</button>
 
         <div className="flavors-con">
           {Array.from(userFlavorPreference.entries()).map(([flavor, preference]) => (
@@ -45,6 +46,24 @@ function Flavor(props) {
       </div>
     </div>
   );
+}
+
+function randomizeFlavors(setUserFlavorPreference) {
+  setUserFlavorPreference(prev => {
+    const newMap = new Map(prev);
+    newMap.set("Spicy", getRandomInt(100));
+    newMap.set("Sweet", getRandomInt(100));
+    newMap.set("Salty", getRandomInt(100));
+    newMap.set("Bitter", getRandomInt(100));
+    newMap.set("Rich", getRandomInt(100));
+    newMap.set("Umami", getRandomInt(100));
+    newMap.set("Sour", getRandomInt(100));
+    return newMap;
+  });
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
 
 const SingleFlavor = ( {name, preference, userFlavorPreference, setUserFlavorPreference} ) => {
