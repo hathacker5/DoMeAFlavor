@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import RecipePage from "./RecipePage";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 function RecipeList(props) {
   const userIngredientList = props.userIngredientList;
@@ -228,7 +230,10 @@ const RecipeListHeader = () => {
 function Loading ({ loading, loadingError }) {
   if (loading) {
     return (
+    
       <div>
+        <Spinner animation="border" role="status">
+        </Spinner>
         <p>
           Loading...
         </p>
