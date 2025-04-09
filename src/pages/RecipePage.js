@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SubstitutionPopup from "./SubstitutionPopup";
 import { Button, Modal } from "react-bootstrap";
+import { Prev } from "react-bootstrap/esm/PageItem";
 
 
 function RecipePage(props){
@@ -43,7 +44,7 @@ function RecipePageCard (props) {
   // user specified
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
-  // user exxclu
+  // user exclusions
   const userExclusionList = props.userExclusionList;
   const setUserExclusionList = props.setUserExclusionList;
 
@@ -97,7 +98,8 @@ function RecipePageCard (props) {
       <ul>
         {recipeIngred.map((item, index) => (
           <li key={index}>
-            <p>{item.name} ( {item.amount.us.value} {item.amount.us.unit} )</p>
+            <p>{item.name} ( {item.amount.us.value} {item.amount.us.unit} )</p> 
+            {item.name.includes("(Substitute") ? (<button onClick={() => undoSubstitution(item, setMissingIngred)}>↺</button>) : ""}
           </li>
         ))}
       </ul>
@@ -113,6 +115,11 @@ function RecipePageCard (props) {
     </div>
   )
 };
+
+function undoSubstitution(recipe, setMissingIngred) {
+  recipe.name = recipe.name.replace(/ *\(Substitute [^)]*\) */g, "");
+  setMissingIngred((prev) => [...prev, recipe])
+}
 
 const handleDisplayOnClick = (recipeID, setInstructionList, setRecipeIngred) => {
   fetchRecipeInstructions(recipeID, setInstructionList);
