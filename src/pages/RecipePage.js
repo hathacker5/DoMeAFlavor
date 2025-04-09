@@ -85,21 +85,23 @@ function RecipePageCard (props) {
         ))} */}
 
       <h2>Current exclusions:</h2>
-      {console.log("exclusion list", userExclusionList)}
+      {recipeIngred.length == 0 ? "" : 
+      (<ul>
       {userExclusionList.map((ingred, index) => (
-          <div key={index}>
-              <p>Exclusion {index}</p>
-              <p>Exclude {ingred}.</p>
-          </div>
+        recipeIngred.some(entry => entry.name.includes(ingred.name)) ? 
+        (<div key={index}>
+            <li>{ingred.name} <button onClick={() => undoExclusion(ingred, setUserExclusionList, setMissingIngred)}>↺</button> </li>
+        </div>) : ""
       ))}
+      </ul>)}
 
       
       <h1>Ingredients</h1>
       <ul>
         {recipeIngred.map((item, index) => (
           <li key={index}>
-            <p>{item.name} ( {item.amount.us.value} {item.amount.us.unit} )</p> 
-            {item.name.includes("(Substitute") ? (<button onClick={() => undoSubstitution(item, setMissingIngred)}>↺</button>) : ""}
+            <p>{item.name} ( {item.amount.us.value} {item.amount.us.unit} ) {item.name.includes("(Substitute") ? (<button onClick={() => undoSubstitution(item, setMissingIngred)}>↺</button>) : ""}</p> 
+            
           </li>
         ))}
       </ul>
@@ -115,6 +117,11 @@ function RecipePageCard (props) {
     </div>
   )
 };
+
+function undoExclusion(recipe, setUserExclusionList, setMissingIngred) {
+  setUserExclusionList((prev) => prev.filter(i => i !== recipe));
+  setMissingIngred((prev) => [...prev, recipe]);
+}
 
 function undoSubstitution(recipe, setMissingIngred) {
   recipe.name = recipe.name.replace(/ *\(Substitute [^)]*\) */g, "");

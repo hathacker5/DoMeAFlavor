@@ -112,7 +112,7 @@ const SubstitutionMenu = ({
         ))}
 
         <button onClick={() => {
-          setUserExclusionList((prev) => [...prev, `${missing}`]);
+          setUserExclusionList((prev) => [...prev, missingIngred[0]]);
           setMissingIngred((prev) => prev.slice(1));
         }}
           className="btn btn-secondary"
