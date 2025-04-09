@@ -41,6 +41,7 @@ const SubstitutionMenu = ({
   
   const [loadingAlternatives, setLoadingAlternatives] = useState(true);
   const [alternatives, setAlternatives] = useState([]);
+  const [updateUserIngredientList, setUpdateUserIngredientList] = useState(false);
   console.log("missing ingredients 2", missingIngred);
   // const missing = missingIngred.length == 0 ? null : missingIngred[0];
   const missingAmount = missingIngred.length == 0 ? null : missingIngred[0].amount;
@@ -76,6 +77,13 @@ const SubstitutionMenu = ({
             substitutions below.
         </p>
 
+        <label>
+          <input type="checkbox" checked={updateUserIngredientList} onChange={() => setUpdateUserIngredientList(!updateUserIngredientList)}/>
+          Add substitution to ingredients I have.
+        </label>
+        
+
+
         {alternatives.map((alt, index) => (
             <button
             key={index}
@@ -93,8 +101,9 @@ const SubstitutionMenu = ({
                 // setRecipeIngred((prev) => [...prev, {name: `${missing} (Substitute ${missingFull} with ${alt})`, amount: missingAmount, image: null}]);
                 // // [...prev, `${missing} (Substitute ${missingFull} with ${alt})`]
                 // console.log("new after button click");
-
-                setUserIngredientList((prev) => [...prev, `${alt}`]);
+                if (updateUserIngredientList) {
+                  setUserIngredientList((prev) => [...prev, `${alt}`]);
+                }
             }}
             className="btn btn-secondary"
             >
