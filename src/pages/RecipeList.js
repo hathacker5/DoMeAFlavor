@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import RecipePage from "./RecipePage";
 import Spinner from 'react-bootstrap/Spinner';
+import { Button, Modal } from 'react-bootstrap';
 
 
 function RecipeList(props) {
@@ -29,7 +30,7 @@ function RecipeList(props) {
 
   return (
     <div>
-      <RecipeListHeader />
+      <RecipeListHeader userIngredientList={userIngredientList} userFlavorPreference={userFlavorPreference}/>
 
       <div className="container">
 
@@ -209,7 +210,12 @@ const getFlavorProfile = async (recipeID) => {
   }
 };
 
-const RecipeListHeader = () => {
+const RecipeListHeader = ({userIngredientList, userFlavorPreference}) => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="header">
       <div className="header-buttons-con">
@@ -224,8 +230,24 @@ const RecipeListHeader = () => {
           </Link>
         </div>
         <div className="header-recipe">
-          <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button>
-        </div>
+          <button className="btn btn-primary" onClick={handleShow} > ≡ </button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>My Current Recipe</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>My Ingredients: </p>
+              <HeaderIngredients list={userIngredientList} />
+              <p>My Flavors: </p>
+              <HeaderFlavors flavors={userFlavorPreference} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+       </div>
       </div>
       <div className="header-title">
         Find Recipes with Matching Flavors
@@ -255,6 +277,39 @@ function Loading ({ loading, loadingError }) {
       </div>
     )
   }
+}
+
+function HeaderIngredients ({ list }) {
+  console.log("list in headeringredients", list);
+  if (list.length > 0) {
+    return (
+      <div className="myrecipe-list">
+        {list.map((item, index) => (
+          <p>{item}</p>
+        ))}
+      </div>
+    );
+  } else {
+    return (
+    <p className="myrecipe-err">
+      No ingredients added.
+    </p> 
+    );
+  }
+}
+
+function HeaderFlavors ({ flavors }) {
+  console.log("headerflavors:", flavors);
+
+  return (
+    <div className="myrecipe-list">
+      {Array.from(flavors.entries()).map(([key, value]) => (
+        <p key={key}>
+          {key}: {value}%
+        </p>
+      ))}
+    </div>
+  );
 }
 
 export default RecipeList;
