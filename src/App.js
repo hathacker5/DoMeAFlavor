@@ -27,7 +27,7 @@ function App() {
 
   const [userRecipeList, setUserRecipeList] = useState([]);
 
-  const [tutorialMode, setTutorialMode] = useState(false);
+  const [tutorialMode, setTutorialMode] = useState(true);
 
   return (
     <div>

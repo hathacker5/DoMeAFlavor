@@ -31,10 +31,10 @@ function Buttons(props) {
           <button className="btn btn-primary button-start" >Let Me Cook!</button>
         </Link>
         <div>
-          <label>
+          {/* <label>
             <input type="checkbox" checked={props.tutorialMode} onChange={() => props.setTutorialMode(!props.tutorialMode)}/>
             Tutorial Mode!
-          </label>
+          </label> */}
         </div>
       </div>
 
