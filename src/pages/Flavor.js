@@ -6,6 +6,27 @@ import { useState } from "react";
 import Form from 'react-bootstrap/Form';
 import { Button, Modal } from 'react-bootstrap';
 
+const WaveHeader = ({title}) => {
+  return (
+    <div className="wave-header">
+      <div className="header-content">
+        <h1>{title}</h1>
+      </div>
+      <svg
+        className="wave-svg"
+        viewBox="0 0 1440 150"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#ffffff"
+          d="M0,96L80,101.3C160,107,320,117,480,122.7C640,128,800,128,960,117.3C1120,107,1280,85,1360,74.7L1440,64V150H1360C1280,150,1120,150,960,150C800,150,640,150,480,150C320,150,160,150,80,150H0Z"
+        />
+      </svg>
+    </div>
+  );
+}
+
+
 function Flavor(props) {
   const userFlavorPreference = props.userFlavorPreference;
   const setUserFlavorPreference = props.setUserFlavorPreference;
@@ -117,49 +138,7 @@ const FlavorHeader = ( {userIngredientList, userFlavorPreference} ) => {
   const handleShow = () => setShow(true);
   
   return (
-    <div className="header">
-      <div className="header-buttons-con">
-        <div className="nav-button">
-          <Link to="/Ingredients">
-          <button className="btn btn-primary" >Back</button>
-          </Link>
-        </div>
-        <div className="nav-button">
-          <Link to="/">
-          <button className="btn btn-primary" >Home</button>
-          </Link>
-        </div>
-
-        {/* My Recipe (current user selections) */}
-        <div className="header-recipe">
-          <Button variant="primary" onClick={handleShow}>
-            ≡
-          </Button>
-
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>My Current Recipe</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>My Ingredients: </p>
-              <HeaderIngredients list={userIngredientList} />
-              <p>My Flavors: </p>
-              <HeaderFlavors flavors={userFlavorPreference} />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          {/* <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button> */}
-        </div>
-      </div>
-      <div className="header-title">
-        Customize Your Flavor Profile
-      </div>
-    </div>
+   <WaveHeader title = "Customize your flavors"></WaveHeader>
   );
 }
 
