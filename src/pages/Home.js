@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function Home(props) {
   return (
-    <div>
+    <div className='homepage'>
       <Title />
       <Buttons tutorialMode={props.tutorialMode} setTutorialMode={props.setTutorialMode} />
       <FlavorIcons />
@@ -17,8 +17,8 @@ function Title() {
   return (
     // todo change to center vertically in the box, or just have large upper paddning
     <div className="title-con">
-      <h1 id="title-1">Welcome to</h1>
-      <h1 id="title-2">Do Me A Flavor!</h1>
+      <h1 id="title-1">WELCOME TO </h1>
+      <h1 id="title-2">Do Me a Flavor!</h1>
     </div>
   )
 }

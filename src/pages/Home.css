@@ -1,10 +1,34 @@
 /* home.css home page */
+@font-face {
+  font-family: 'Donatello';
+  src: url('../assets/Donatello.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'Vividly';
+  src: url('../assets/Vividly-Regular.ttf') format('ttf'),
+      url('../assets/Vividly-Regular.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.homepage{
+  background-color: #2BC1CC;
+  padding: 10px;
+  margin : 0px; 
+}
+
 #title-1 {
-  font-size: 200%;
+  font-size: 300%;
+  font-family: 'Vividly', sans-serif
+  
 }
 #title-2 {
   padding: 5%;
-  font-size: 300%;
+  font-size: 500%;
+  font-family: 'Donatello', sans-serif
 }
 
 .card {
@@ -18,7 +42,7 @@
   background-color: #2BC1CC;
   text-align: center;
   color: white;
-
+  padding-top: 100px;
   /* min-height requires display, flex-direction, align-itmes, and justify-content */
   min-height: 50vh;
   display: flex;

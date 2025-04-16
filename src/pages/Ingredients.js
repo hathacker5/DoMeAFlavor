@@ -7,6 +7,30 @@ import { useState } from "react";
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
+
+const WaveHeader = ({subtitle, title}) => {
+  return (
+    <div className="wave-header">
+      <div className="header-content">
+        <h2 className = "header-subtitle">{subtitle}</h2>
+        <h1 className ="header-text">{title}</h1>
+      </div>
+      <svg
+        className="wave-svg"
+        viewBox="0 0 1440 150"
+        style={{ transform: 'rotate(180deg)' }}
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#ffffff"
+          d="M0,64 C480,120 960,0 1440,64 L1440,0 L0,0 Z"
+        />
+      </svg>
+    </div>
+  );
+}
+
 function Ingredients(props) {
   const userIngredientList = props.userIngredientList;
   const setUserIngredientList = props.setUserIngredientList;
@@ -205,6 +229,7 @@ const IngredientsHeader = ( list ) => {
   const handleShow = () => setShow(true);
 
   return (
+    <div>
     <div className="header">
       <div className="header-buttons-con">
         <div className="nav-button">
@@ -242,9 +267,10 @@ const IngredientsHeader = ( list ) => {
           {/* <button className="btn btn-primary" onClick={() => alert("my Recipe tracking feature coming soon!")} > ≡ </button> */}
         </div>
       </div>
-      <div className="header-title">
-        Customize Your Flavor Profile
-      </div>
+    </div>
+    <div>
+      <WaveHeader subtitle = "PICK YOUR" title= "Ingredients" />
+    </div>
     </div>
   );
 }

@@ -4,22 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Form from 'react-bootstrap/Form';
+import { FaArrowLeft, FaHome, FaBars } from 'react-icons/fa';
+
 import { Button, Modal } from 'react-bootstrap';
 
-const WaveHeader = ({title}) => {
+const WaveHeader = ({subtitle, title}) => {
   return (
     <div className="wave-header">
       <div className="header-content">
-        <h1>{title}</h1>
+        <h2 className = "header-subtitle">{subtitle}</h2>
+        <h1 className ="header-text">{title}</h1>
       </div>
       <svg
         className="wave-svg"
         viewBox="0 0 1440 150"
+        style={{ transform: 'rotate(180deg)' }}
+        preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
           fill="#ffffff"
-          d="M0,96L80,101.3C160,107,320,117,480,122.7C640,128,800,128,960,117.3C1120,107,1280,85,1360,74.7L1440,64V150H1360C1280,150,1120,150,960,150C800,150,640,150,480,150C320,150,160,150,80,150H0Z"
+          d="M0,64 C480,120 960,0 1440,64 L1440,0 L0,0 Z"
         />
       </svg>
     </div>
@@ -138,9 +143,51 @@ const FlavorHeader = ( {userIngredientList, userFlavorPreference} ) => {
   const handleShow = () => setShow(true);
   
   return (
-   <WaveHeader title = "Customize your flavors"></WaveHeader>
+    <div>
+    <div className="header">
+      <div className="header-buttons-con">
+        <div className="nav-button">
+          <Link to="/Ingredients">
+          <button className="btn btn-primary" >Back</button>
+          </Link>
+        </div>
+        <div className="nav-button">
+          <Link to="/">
+          <button className="btn btn-primary" >Home</button>
+          </Link>
+        </div>
+
+        {/* My Recipe (current user selections) */}
+        <div className="header-recipe">
+          <Button variant="primary" onClick={handleShow}>
+            ≡
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>My Current Recipe</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>My Ingredients: </p>
+              <HeaderIngredients list={userIngredientList} />
+              <p>My Flavors: </p>
+              <HeaderFlavors flavors={userFlavorPreference} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          </div>
+          </div>
+    </div>
+    <div>
+      <WaveHeader subtitle = "CUSTOMIZE YOUR" title ="Flavor Profile"/>
+    </div>
+    </div>
   );
-}
+};
 
 function HeaderIngredients ({ list }) {
   console.log("list in headeringredients", list);

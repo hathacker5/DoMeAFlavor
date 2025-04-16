@@ -1,4 +1,64 @@
 /* recipeList.css */
+
+@font-face {
+  font-family: 'Donatello';
+  src: url('../assets/Donatello.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: 'Vividly';
+  src: url('../assets/Vividly-Regular.ttf') format('ttf'),
+      url('../assets/Vividly-Regular.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.header{
+  padding: 0px;
+  margin: 0px;
+  background-color: #2bc1cc;
+}
+.header-text{
+  text-align: center;
+  font-size: 54px;
+  font-family: 'Donatello', sans-serif;
+}
+
+.header-subtitle{
+  text-align: center;
+  font-family: 'Vividly', sans-serif;
+  font-size: 40px;
+  padding-bottom: 5px;
+}
+.wave-header {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #2BC1CC;
+  color: white;
+}
+
+.header-content {
+  padding: 40px 20px;
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.wave-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(40px, 10vw, 80px);
+  display: block;
+  margin-bottom: -1px; 
+  margin-top: 0px;
+}
+
 .get-recipes-button {
   display: flex;
   justify-content: center;
@@ -14,8 +74,9 @@
   margin: 10px;
 }
 .card-title {
-  font-size: 200%; 
-  color: #6cb1c9;
+  font-size: 250%; 
+  color: #2BC1CC;
+  font-family: 'Vividly';
 }
 /* .mycard {
   display: "flex";
