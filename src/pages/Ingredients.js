@@ -167,8 +167,7 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
     <div className="container" >
       <div className="row">
         <div className="col-3">
-          <img src={image} alt={"An image of " + name} class="img-fluid rounded float-left"/>
-        </div>
+        <img src={`https://img.spoonacular.com/ingredients_100x100/${image}`} alt={"An image of " + name} class="img-fluid rounded float-left"/>        </div>
         <div className="col-8">
           <div className="row ingredname">
             <b>{name}</b>

@@ -97,8 +97,7 @@ const SingleFlavor = ( {name, preference, userFlavorPreference, setUserFlavorPre
     <div>
       <div className="row">
         <div className="col-3">
-          <img src={`../../public/images/icon_${name}.svg`} alt={`${name} icon`} className="flavor-icon" />
-        </div>
+        <img src={process.env.PUBLIC_URL + `/images/icon_${name.toLowerCase()}.svg`} alt={`${name} icon`} className="flavor-icon" />        </div>
         <div className="col-9">
           <h2>{name}</h2>
           <Slider name={name} preference={preference} userFlavorPreference={userFlavorPreference} setUserFlavorPreference={setUserFlavorPreference} />
