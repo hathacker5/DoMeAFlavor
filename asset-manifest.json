@@ -1,8 +1,13 @@
 {
   "files": {
-    "main.css": "/DoMeAFlavor/static/css/main.b766a651.css",
-    "main.js": "/DoMeAFlavor/static/js/main.83be76c6.js",
+    "main.css": "/DoMeAFlavor/static/css/main.de58a65b.css",
+    "main.js": "/DoMeAFlavor/static/js/main.30f502f8.js",
     "static/js/453.471d1919.chunk.js": "/DoMeAFlavor/static/js/453.471d1919.chunk.js",
+    "static/media/Louis-George-Italic-Heavy.ttf": "/DoMeAFlavor/static/media/Louis-George-Italic-Heavy.c14429d37480c50e3dcf.ttf",
+    "static/media/Louis-George-Italic.ttf": "/DoMeAFlavor/static/media/Louis-George-Italic.dc92b4f17f7b2f06a557.ttf",
+    "static/media/Donatello.ttf": "/DoMeAFlavor/static/media/Donatello.b8f6538bb07bf9322ad0.ttf",
+    "static/media/Vividly-Regular.otf": "/DoMeAFlavor/static/media/Vividly-Regular.02a878fa24650a65c2ae.otf",
+    "static/media/Vividly-Regular.ttf": "/DoMeAFlavor/static/media/Vividly-Regular.02a878fa24650a65c2ae.ttf",
     "static/media/icon_umami.svg": "/DoMeAFlavor/static/media/icon_umami.3c4d9ff3a4296279d915.svg",
     "static/media/icon_salty.svg": "/DoMeAFlavor/static/media/icon_salty.1eae32b2db2d2b01c233.svg",
     "static/media/icon_sweet.svg": "/DoMeAFlavor/static/media/icon_sweet.70e83f349c9c1c61d6ac.svg",
@@ -11,12 +16,12 @@
     "static/media/icon_bitter.svg": "/DoMeAFlavor/static/media/icon_bitter.b12dab5f9fdb6b610e4a.svg",
     "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.6fd4a816ca0c7394e017.svg",
     "index.html": "/DoMeAFlavor/index.html",
-    "main.b766a651.css.map": "/DoMeAFlavor/static/css/main.b766a651.css.map",
-    "main.83be76c6.js.map": "/DoMeAFlavor/static/js/main.83be76c6.js.map",
+    "main.de58a65b.css.map": "/DoMeAFlavor/static/css/main.de58a65b.css.map",
+    "main.30f502f8.js.map": "/DoMeAFlavor/static/js/main.30f502f8.js.map",
     "453.471d1919.chunk.js.map": "/DoMeAFlavor/static/js/453.471d1919.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b766a651.css",
-    "static/js/main.83be76c6.js"
+    "static/css/main.de58a65b.css",
+    "static/js/main.30f502f8.js"
   ]
 }
