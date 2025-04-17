@@ -20,15 +20,41 @@
   margin : 0px; 
 }
 
+.hm-page-main-buttons{
+  height: 60px;
+  width: 60%;
+  border-radius: 25px;
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 33px;
+  color:#2BC1CC;
+}
+
+.hm-page-sub-buttons{
+  height: 35px;
+  width: 90%;
+  border-radius: 25px; 
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 25px;
+  color:#2BC1CC;
+}
+
 #title-1 {
   font-size: 300%;
-  font-family: 'Vividly', sans-serif
+  font-family: 'Vividly', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
   
 }
 #title-2 {
   padding: 5%;
   font-size: 500%;
-  font-family: 'Donatello', sans-serif
+  font-family: 'Donatello', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
 }
 
 .card {
@@ -56,6 +82,7 @@
 }
 .buttons-con-inner {
   padding: 3%;
+  padding-left: 20px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

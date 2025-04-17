@@ -28,7 +28,7 @@ function Buttons(props) {
     <div className="buttons-con-outer">
       <div className="button-start-con">
         <Link to="/Ingredients">
-          <button className="btn btn-primary button-start" >Let Me Cook!</button>
+          <button className="hm-page-main-buttons" >Let Me Cook!</button>
         </Link>
         <div>
           {/* <label>
@@ -38,19 +38,19 @@ function Buttons(props) {
         </div>
       </div>
 
-      <div className=" buttons-con-inner">
-        <div className=" justify-content-center">
-          <button className="btn btn-primary" onClick={() => alert("Drafts feature coming soon!")}>
+      <div className="buttons-con-inner">
+        <div className="justify-content-center">
+          <button className="hm-page-sub-buttons" onClick={() => alert("Drafts feature coming soon!")}>
             Drafts
           </button>
         </div>
         <div className="justify-content-center ">
-          <button className="btn btn-primary" onClick={() => alert("Cookbook feature coming soon!")}>
+          <button className="hm-page-sub-buttons" onClick={() => alert("Cookbook feature coming soon!")}>
             Cookbook
           </button>
         </div>
         <div className="justify-content-center ">
-          <button className="btn btn-primary" onClick={() => alert("Help feature coming soon!")}>
+          <button className="hm-page-sub-buttons" onClick={() => alert("Help feature coming soon!")}>
             Help
           </button>
         </div>

@@ -15,6 +15,25 @@
   font-style: normal;
 }
 
+
+@font-face{
+  font-family: 'Louis-George-Cafe-Italic';
+  src: url('../assets/Louis-George-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face{
+  font-family: 'Louis-George-Cafe-Heavy';
+  src: url('../assets/Louis-George-Italic-Heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: oblique;
+}
+
+.container{
+  text-align: center;
+}
+
 .header{
   padding: 0px;
   margin: 0px;
@@ -106,6 +125,26 @@
   cursor: pointer;
 }
 
+.flavors-con{
+  padding-bottom: 70px;
+  text-align: left;
+  font-family: 'Louis-George-Cafe-Heavy';
+  font-style: oblique;
+  color: #4a4a4a
+}
+
+.surprise-me-button{
+  display: inline-block;
+  height: 40px;
+  width: 50%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
 .slider::-moz-range-thumb {
   width: 23px;
   height: 25px;
@@ -169,4 +208,26 @@
 
 .icon_umami::-moz-range-thumb {
   background: url('../../public/images/icon_umami.svg');
+}
+
+.footnext{
+  height: 40px;
+  width: 100px;
+  border-radius: 25px; 
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:#2BC1CC;
+}
+
+.footback{
+  height: 40px;
+  width: 100px;
+  border-radius: 25px; 
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:#2BC1CC;
 }

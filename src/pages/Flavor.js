@@ -41,8 +41,9 @@ function Flavor(props) {
       <FlavorHeader userIngredientList={props.userIngredientList} userFlavorPreference={userFlavorPreference} />
 
       <div className="container">
-        <button onClick={() => randomizeFlavors(setUserFlavorPreference)} className="btn btn-primary"> Surprise me</button>
-
+        <div className="surpriseme">
+        <button onClick={() => randomizeFlavors(setUserFlavorPreference)} className="surprise-me-button"> Surprise me</button>
+        </div>
         <div className="flavors-con">
           {Array.from(userFlavorPreference.entries()).map(([flavor, preference]) => (
             <SingleFlavor
@@ -59,12 +60,12 @@ function Flavor(props) {
         <div className="footer-buttons-con">
           <div className="footer-back">
             <Link to="/Ingredients">
-              <button className="btn btn-primary" >Back</button>
+              <button className="footback" >Back</button>
             </Link> 
           </div>
           <div className="footer-next">
             <Link to="/RecipeList" onClick={(e) => handleFlavorsNext(e, userFlavorPreference)}>
-              <button className="btn btn-primary" >Next</button>
+              <button className="footnext" >Next</button>
             </Link>
           </div>
         </div> 
@@ -148,20 +149,24 @@ const FlavorHeader = ( {userIngredientList, userFlavorPreference} ) => {
       <div className="header-buttons-con">
         <div className="nav-button">
           <Link to="/Ingredients">
-          <button className="btn btn-primary" >Back</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
           </Link>
         </div>
         <div className="nav-button">
           <Link to="/">
-          <button className="btn btn-primary" >Home</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house-door" viewBox="0 0 16 16">
+          <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+          </svg>
           </Link>
         </div>
 
         {/* My Recipe (current user selections) */}
         <div className="header-recipe">
-          <Button variant="primary" onClick={handleShow}>
-            ≡
-          </Button>
+           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16" onClick={handleShow}>
+           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+           </svg>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

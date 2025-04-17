@@ -70,24 +70,28 @@ function Ingredients(props) {
             )}
           </div>
 
+          <div className = "IngredientListHeader">
           <p><br/>My Ingredients:</p>
+          </div>
+          <div className = "ingredListCurr">
           <CurrentIngredients 
             list={userIngredientList} 
             ingredientList={userIngredientList}
             setIngredientList={setUserIngredientList}
           />
+          </div>
 
           {/* buttons */}
           <div className="footer-buttons-con">
             <div className="footer-back">
               <Link to="/">
-                <button className="btn btn-primary" >Back</button>
+                <button className="footback" >Back</button>
               </Link> 
             </div>
             <div className="footer-next">
               <Link to="/Flavors" onClick={(e) => handleIngredientsNext(e, userIngredientList.length === 0)} 
                   state={{userIngredientList: {userIngredientList}}}>  
-                <button className="btn btn-primary" >Next</button>
+                <button className="footnext" >Next</button>
               </Link>
             </div>
           </div> 
@@ -111,7 +115,7 @@ export function SearchBox({ searchResults, setSearchResults }) {
   };
 
   return (
-    <>
+    <div className = "searchbox">
       <input
         type="text"
         placeholder="Search for ingredients"
@@ -119,8 +123,11 @@ export function SearchBox({ searchResults, setSearchResults }) {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <p><b>SEARCHING FOR: {searchText.toUpperCase()}</b></p>
-    </>
+      <svg xmlns="http://www.w3.org/2000/svg" className = "searchIcon" width="40" height="30" fill="#2bc1cc" class="bi bi-search" viewBox="0 0 16 16" onClick = {() =>  {handleSearch (searchText, setSearchResults)}}>
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+      </svg>
+      <p className = "searchingfor">SEARCHING FOR: {searchText.toUpperCase()}</p>
+    </div>
   );
 }
 
@@ -163,7 +170,7 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
           <img src={image} alt={"An image of " + name} class="img-fluid rounded float-left"/>
         </div>
         <div className="col-8">
-          <div className="row">
+          <div className="row ingredname">
             <b>{name}</b>
           </div>
         </div>
@@ -234,20 +241,24 @@ const IngredientsHeader = ( list ) => {
       <div className="header-buttons-con">
         <div className="nav-button">
           <Link to="/">
-          <button className="btn btn-primary" >Back</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
           </Link>
         </div>
         <div className="nav-button">
           <Link to="/">
-          <button className="btn btn-primary" >Home</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house-door" viewBox="0 0 16 16">
+          <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+          </svg>
           </Link>
         </div>
 
         {/* My Recipe (current user selections) */}
         <div className="header-recipe">
-          <Button variant="primary" onClick={handleShow}>
-            ≡
-          </Button>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16" onClick={handleShow}>
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
