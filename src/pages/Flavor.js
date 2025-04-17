@@ -170,16 +170,16 @@ const FlavorHeader = ( {userIngredientList, userFlavorPreference} ) => {
 
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>My Current Recipe</Modal.Title>
+              <Modal.Title className = "modal-header">My Current Recipe</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className = "modal-body">
               <p>My Ingredients: </p>
               <HeaderIngredients list={userIngredientList} />
               <p>My Flavors: </p>
               <HeaderFlavors flavors={userFlavorPreference} />
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button className="modal-button" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>

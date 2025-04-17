@@ -61,32 +61,32 @@ function RecipeList(props) {
         <div className="footer-buttons-con">
           <div className="footer-back">
             <Link to="/Flavors">
-              <button className="btn btn-primary">Back</button>
+              <button className="footback">Back</button>
             </Link> 
           </div>
           <div className="footer-next">
             <Link to="/">
-              <button className="btn btn-primary">Go Home</button>
+              <button className="footnext">Home</button>
             </Link>
           </div>
         </div>
 
         {/* {console.log("userFlavorPreference", userFlavorPreference)} */}
         <div className="get-recipes-button">
-          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError, userExclusionList, setNumRecipesExcluded)} className="btn btn-primary">
+          <button onClick={() => getRecipes(userIngredientList, userFlavorPreference, userRecipeList, setUserRecipeList, setLoading, setLoadingError, userExclusionList, setNumRecipesExcluded)} className="getRecipes">
             Get Recipes
           </button>
         </div>
 
-        {tutorialMode ? (<p>
+        {tutorialMode ? (<div className = "Tutorial"> <p>
           Click "Get Recipes" to load or update your recipes.
           Click the menu icon on the top right to see your ingredients and flavors.
-        </p>) : ""}
+        </p> </div>) : ""}
         
 
         <Loading loading={loading} loadingError={loadingError} />
 
-        {userRecipeList.length > 0 ? (<p>{numRecipesExcluded} recipes are excluded from your search.</p>) : ""}
+        {userRecipeList.length > 0 ? (<div className = "recexclusions"> <p>{numRecipesExcluded} recipes are excluded from your search.</p> </div>) : ""}
 
         {userRecipeList.map((recipe) => (
           <div>
@@ -116,7 +116,7 @@ const RecipeCard = ({ recipe, setOpenRecipeId }) => {
               <br/>
               <p className="popup-match">{parseInt(recipe.score)}% flavor match<br /></p>
               <div className="popup-button">
-                <button onClick={() => setOpenRecipeId(recipe.id)} className="btn btn-primary"> 
+                <button onClick={() => setOpenRecipeId(recipe.id)} className="openRecipe"> 
                   Open Recipe for {recipe.title}. 
                 </button>
               </div>
@@ -245,28 +245,34 @@ const RecipeListHeader = ({userIngredientList, userFlavorPreference}) => {
       <div className="header-buttons-con">
         <div className="nav-button">
           <Link to="/Flavors">
-          <button className="btn btn-primary" >Back</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+          </svg>
           </Link>
         </div>
         <div className="nav-button">
           <Link to="/">
-          <button className="btn btn-primary" >Home</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-house-door" viewBox="0 0 16 16">
+          <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+          </svg>
           </Link>
         </div>
         <div className="header-recipe">
-          <button className="btn btn-primary" onClick={handleShow} > ≡ </button>
+           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16" onClick={handleShow}>
+           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+           </svg>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>My Current Recipe</Modal.Title>
+              <Modal.Title className = "modal-header" >My Current Recipe</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className = "modal-body">
               <p>My Ingredients: </p>
               <HeaderIngredients list={userIngredientList} />
               <p>My Flavors: </p>
               <HeaderFlavors flavors={userFlavorPreference} />
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button className="modal-button" onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>

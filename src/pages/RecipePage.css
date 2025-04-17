@@ -12,3 +12,39 @@
 .rp-button {
   margin: 5px;
 }
+
+.Display-Recipe{
+  display: inline-block;
+  height: 50px;
+  width: 50%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
+.Substitute-Ingredients{
+  display: inline-block;
+  height: 50px;
+  width: 60%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
+.modal-foot{
+  display: inline-block;
+  height: 50px;
+  width: 30%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}

@@ -31,7 +31,7 @@ function RecipePage(props){
         <RecipePageCard recipe={recipe} userIngredientList={userIngredientList} setUserIngredientList={setUserIngredientList} userExclusionList={userExclusionList} setUserExclusionList={setUserExclusionList}/>
       </Modal.Body>
       <Modal.Footer>
-      <Button variant="primary" onClick={() => props.setOpenRecipeId("")}>
+      <Button className = "modal-foot" onClick={() => props.setOpenRecipeId("")}>
         Close
       </Button>
       </Modal.Footer>
@@ -65,11 +65,11 @@ function RecipePageCard (props) {
         <img src= {recipe.image} className="recipe-image"></img>
 
 
-        <button onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)} className="btn btn-primary rp-button">
+        <button className = "Display-Recipe" onClick = {()=>  handleDisplayOnClick(recipe.id, setInstructionList, setRecipeIngred)}>
           Display Recipe
         </button>
 
-        {recipeIngred.length == 0 ? " " : (<button onClick={() => setButtonPopup(true)} className="btn btn-primary rp-button">Substitute Ingredients</button>)}
+        {recipeIngred.length == 0 ? " " : (<button onClick={() => setButtonPopup(true)} className="Substitute-Ingredients">Substitution/Exclusion</button>)}
       </div>
       
       {/*  newIngred={newIngred} setNewIngred={setNewIngred} */}

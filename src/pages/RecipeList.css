@@ -15,6 +15,19 @@
   font-style: normal;
 }
 
+@font-face{
+  font-family: 'Louis-George-Cafe-Italic';
+  src: url('../assets/Louis-George-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face{
+  font-family: 'Louis-George-Cafe-Heavy';
+  src: url('../assets/Louis-George-Italic-Heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: oblique;
+}
 
 .header{
   padding: 0px;
@@ -27,12 +40,66 @@
   font-family: 'Donatello', sans-serif;
 }
 
+.modal-header{
+  font-family: 'Vividly';
+  font-size: 40px;
+}
+
+.modal-body{
+  font-family: 'Louis-George-Cafe-Italic';
+  font-style: italic;
+  font-size: 20px;
+}
+
+.modal-button{
+  display: inline-block;
+  height: 50px;
+  width: 30%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
+
+.getRecipes {
+  display: inline-block;
+  height: 40px;
+  width: 50%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+} 
+
+.recexclusions{
+  font-family: 'Louis-George-Cafe-Italic';
+  font-style: italic;
+}
+
+.openRecipe{
+  display: inline-block;
+  height: 120px;
+  width: 100%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
 .header-subtitle{
   text-align: center;
   font-family: 'Vividly', sans-serif;
   font-size: 40px;
   padding-bottom: 5px;
 }
+
 .wave-header {
   width: 100%;
   position: relative;
@@ -57,6 +124,11 @@
   display: block;
   margin-bottom: -1px; 
   margin-top: 0px;
+}
+
+.Tutorial{
+  font-family: 'Louis-George-Cafe-Italic';
+  font-style: italic;
 }
 
 .get-recipes-button {
@@ -116,4 +188,32 @@
 }
 .rp-button {
   margin: 5px;
+}
+
+.footnext{
+  height: 40px;
+  width: 200px;
+  border-radius: 25px; 
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 25px;
+  color:#2BC1CC;
+}
+
+.footback{
+  height: 40px;
+  width: 100%;
+  border-radius: 25px; 
+  background-color: white;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:#2BC1CC;
+}
+
+.popup-match{
+  font-family: 'Louis-George-Cafe-Heavy';
+  font-style: oblique;
+  font-size: 30px;
 }

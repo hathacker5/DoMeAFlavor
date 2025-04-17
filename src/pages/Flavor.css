@@ -59,6 +59,29 @@
   color: white;
 }
 
+.modal-header{
+  font-family: 'Vividly';
+  font-size: 40px;
+}
+
+.modal-body{
+  font-family: 'Louis-George-Cafe-Italic';
+  font-style: italic;
+  font-size: 20px;
+}
+
+.modal-button{
+  display: inline-block;
+  height: 50px;
+  width: 30%;
+  border-radius: 25px; 
+  background-color: #2bc1cc;
+  border: none;
+  font-family: 'Vividly', sans-serif;
+  font-size: 30px;
+  color:white;
+}
+
 .header-content {
   padding: 40px 20px;
   font-size: 48px;
@@ -231,3 +254,4 @@
   font-size: 30px;
   color:#2BC1CC;
 }
+
