@@ -2,18 +2,18 @@
 
 @font-face {
   font-family: 'Donatello';
-  src: url('../assets/Donatello.ttf') format('ttf');
+  src: url('../assets/Donatello.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face{
   font-family: 'Vividly';
-  src: url('../assets/Vividly-Regular.ttf') format('ttf'),
-      url('../assets/Vividly-Regular.otf') format('otf');
+  src: url('../assets/Vividly-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
 
 @font-face{
   font-family: 'Louis-George-Cafe-Italic';

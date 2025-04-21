@@ -16,7 +16,7 @@
 .Display-Recipe{
   display: inline-block;
   height: 50px;
-  width: 50%;
+  width: 100%;
   border-radius: 25px; 
   background-color: #2bc1cc;
   border: none;
@@ -28,7 +28,7 @@
 .Substitute-Ingredients{
   display: inline-block;
   height: 50px;
-  width: 60%;
+  width: 100%;
   border-radius: 25px; 
   background-color: #2bc1cc;
   border: none;
