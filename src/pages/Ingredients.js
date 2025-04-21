@@ -168,12 +168,12 @@ const IngredientItem = ({ name, image, ingredientList, setIngredientList }) => {
       <div className="row">
         <div className="col-3">
         <img src={`https://img.spoonacular.com/ingredients_100x100/${image}`} alt={"An image of " + name} class="img-fluid rounded float-left"/>        </div>
-        <div className="col-8">
+        <div className="col-7">
           <div className="row ingredname">
             <b>{name}</b>
           </div>
         </div>
-        <div className="col-1">
+        <div className="col-2">
           <button onClick ={() => updateIngredientList(name, ingredientList, setIngredientList) } className="add-rm-button" > 
             {ingredientList.includes(name) ? <BsDashCircle className="color-red" /> : <BsPlusCircle className="color-green" /> }
           </button>
