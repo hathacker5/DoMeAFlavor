@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/DoMeAFlavor/static/css/main.7d5ef279.css",
-    "main.js": "/DoMeAFlavor/static/js/main.30f502f8.js",
+    "main.css": "/DoMeAFlavor/static/css/main.893994e8.css",
+    "main.js": "/DoMeAFlavor/static/js/main.ea7cf897.js",
     "static/js/453.471d1919.chunk.js": "/DoMeAFlavor/static/js/453.471d1919.chunk.js",
     "static/media/Louis-George-Italic-Heavy.ttf": "/DoMeAFlavor/static/media/Louis-George-Italic-Heavy.c14429d37480c50e3dcf.ttf",
     "static/media/Louis-George-Italic.ttf": "/DoMeAFlavor/static/media/Louis-George-Italic.dc92b4f17f7b2f06a557.ttf",
     "static/media/Donatello.ttf": "/DoMeAFlavor/static/media/Donatello.b8f6538bb07bf9322ad0.ttf",
     "static/media/Vividly-Regular.ttf": "/DoMeAFlavor/static/media/Vividly-Regular.02a878fa24650a65c2ae.ttf",
-    "static/media/icon_umami.svg": "/DoMeAFlavor/static/media/icon_umami.3c4d9ff3a4296279d915.svg",
-    "static/media/icon_salty.svg": "/DoMeAFlavor/static/media/icon_salty.1eae32b2db2d2b01c233.svg",
-    "static/media/icon_sweet.svg": "/DoMeAFlavor/static/media/icon_sweet.70e83f349c9c1c61d6ac.svg",
-    "static/media/icon_rich.svg": "/DoMeAFlavor/static/media/icon_rich.6c961a4fea5c3b1b0e6b.svg",
-    "static/media/icon_sour.svg": "/DoMeAFlavor/static/media/icon_sour.79d4fdcbb3fb06a679e5.svg",
-    "static/media/icon_bitter.svg": "/DoMeAFlavor/static/media/icon_bitter.b12dab5f9fdb6b610e4a.svg",
-    "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.6fd4a816ca0c7394e017.svg",
+    "static/media/icon_umami.svg": "/DoMeAFlavor/static/media/icon_umami.ff1d9faaab5e00249b5a.svg",
+    "static/media/icon_salty.svg": "/DoMeAFlavor/static/media/icon_salty.12c3230f2e9f68039644.svg",
+    "static/media/icon_sweet.svg": "/DoMeAFlavor/static/media/icon_sweet.be273f12e1ef4cbe0d03.svg",
+    "static/media/icon_rich.svg": "/DoMeAFlavor/static/media/icon_rich.89db6ab6c4eec7485bbe.svg",
+    "static/media/icon_sour.svg": "/DoMeAFlavor/static/media/icon_sour.5e56d89af48820502c03.svg",
+    "static/media/icon_bitter.svg": "/DoMeAFlavor/static/media/icon_bitter.18d5dd37e6b951c113c3.svg",
+    "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.90b26e744ece4742342f.svg",
     "index.html": "/DoMeAFlavor/index.html",
-    "main.7d5ef279.css.map": "/DoMeAFlavor/static/css/main.7d5ef279.css.map",
-    "main.30f502f8.js.map": "/DoMeAFlavor/static/js/main.30f502f8.js.map",
+    "main.893994e8.css.map": "/DoMeAFlavor/static/css/main.893994e8.css.map",
+    "main.ea7cf897.js.map": "/DoMeAFlavor/static/js/main.ea7cf897.js.map",
     "453.471d1919.chunk.js.map": "/DoMeAFlavor/static/js/453.471d1919.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7d5ef279.css",
-    "static/js/main.30f502f8.js"
+    "static/css/main.893994e8.css",
+    "static/js/main.ea7cf897.js"
   ]
 }
