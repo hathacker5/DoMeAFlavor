@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/DoMeAFlavor/static/css/main.aa7192d6.css",
+    "main.css": "/DoMeAFlavor/static/css/main.bef1ef00.css",
     "main.js": "/DoMeAFlavor/static/js/main.30f502f8.js",
     "static/js/453.471d1919.chunk.js": "/DoMeAFlavor/static/js/453.471d1919.chunk.js",
     "static/media/Louis-George-Italic-Heavy.ttf": "/DoMeAFlavor/static/media/Louis-George-Italic-Heavy.c14429d37480c50e3dcf.ttf",
@@ -15,12 +15,12 @@
     "static/media/icon_bitter.svg": "/DoMeAFlavor/static/media/icon_bitter.b12dab5f9fdb6b610e4a.svg",
     "static/media/icon_spicy.svg": "/DoMeAFlavor/static/media/icon_spicy.6fd4a816ca0c7394e017.svg",
     "index.html": "/DoMeAFlavor/index.html",
-    "main.aa7192d6.css.map": "/DoMeAFlavor/static/css/main.aa7192d6.css.map",
+    "main.bef1ef00.css.map": "/DoMeAFlavor/static/css/main.bef1ef00.css.map",
     "main.30f502f8.js.map": "/DoMeAFlavor/static/js/main.30f502f8.js.map",
     "453.471d1919.chunk.js.map": "/DoMeAFlavor/static/js/453.471d1919.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aa7192d6.css",
+    "static/css/main.bef1ef00.css",
     "static/js/main.30f502f8.js"
   ]
 }
